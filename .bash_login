@@ -1,0 +1,38 @@
+#
+#!bash
+# We have no terminal type or have useless value, ask human.
+#
+biff n
+if [ $?TERM = 0 ] || [ $TERM = "su" ] || [ $TERM = "network" ] || \
+    [ $TERM = "unknown" ] || [ $TERM = "switch" ] || [ $TERM = "dialup" ]; then
+	if [ -f /usr/local/etc/motd ]; then 
+		cat /usr/local/etc/motd 
+	fi
+    set noglob; eval `tset -s -Q '?vt100'`; unset noglob
+	biff n
+fi
+clear
+echo " "
+echo " "
+#/usr/games/fortune | tee ~/.fortune
+echo " "
+echo " "
+
+set yorn="N"
+set hname = `hostname`
+#stty erase 
+
+case $TERM in
+	sun)
+		 if [ "`tty`" = "/dev/console" ]; then
+			  echo -n "Enter OpenWindows (Y or N): "
+
+			   read yorn
+
+			  if [ $yorn = "Y" ] || [ $yorn = "y" ]; then
+						/usr/openwin/bin/openwin -noauth
+			fi
+		 fi
+		 ;;
+esac
+#stty crt
