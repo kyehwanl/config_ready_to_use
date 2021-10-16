@@ -25,7 +25,7 @@ highlight JobLine cterm=bold,reverse ctermfg=black ctermbg=white
 highlight SuggestBox cterm=bold ctermfg=default ctermbg=default
 
 if $USER == 'root'
-    highlight Border ctermbg=red
+    "highlight Border ctermbg=red
 endif
 
 highlight {COPYRIGHT,COPYING*,BUGS,ChangeLog*,FAQ,INSTALL*,LICENSE,NEWS,README*,AUTHORS,TODO,THANKS,SERVICES,REPORTING-BUGS} cterm=none ctermfg=187 ctermbg=default
