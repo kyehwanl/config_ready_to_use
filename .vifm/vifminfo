@@ -1,0 +1,1209 @@
+# You can edit this file by hand, but it's recommended not to do that.
+
+# Marks:
+'2
+	/opt/project/gobgp_test/gobgp_v2_running_test/src/github.com/osrg/gobgp
+	..
+1589218794
+'A
+	/opt/project/gobgp_test/gowork/bin
+	config
+1533242615
+'B
+	/opt/project/gobgp_test/gowork/src/github.com/osrg/gobgp
+	server
+1528475933
+'H
+	/users/kyehwanl/
+	..
+1426638950
+'a
+	/opt/project/git.repo/software-development/templates
+	CONTRIBUTING.md
+1592317096
+'b
+	/opt/project/gobgp_test/gowork/bin
+	gobgpd
+1571193668
+'e
+	/opt/project/exabgp_test/exabgp-4.1.2
+	..
+1592363732
+'g
+	/opt/project/gobgp_test/gowork/src/github.com/osrg/gobgp
+	docs
+1562129573
+'k
+	/opt/project/srx_test1/keys
+	45
+1538160931
+'o
+	/opt
+	..
+1522687859
+'p
+	/opt/project
+	..
+1524700033
+'s
+	/opt/project/gobgp_test/gowork/src/srxapi/srx
+	srx_install
+1548797737
+'t
+	/users/kyehwanl/Emulab/config_and_diff_patch
+	..
+1524687506
+'z
+	/users/kyehwanl/.vifm
+	..
+1426638950
+
+# TUI:
+al
+q0
+v2
+ov
+m-1
+l-11,2
+r-11,2
+
+# Left window history (oldest to newest):
+d/opt/project/gobgp_test
+	gowork
+1
+d/opt/project/gobgp_test/gowork
+	bin
+1
+d/opt/project/gobgp_test/gowork/bin
+	..
+0
+d/opt
+	project
+1
+d/opt/project
+	srx_test1
+1
+d/opt/project/srx_test1
+	keys
+1
+d/opt/project/srx_test1/keys
+	30
+13
+d/opt/project/srx_test1/keys/30
+	94E8
+1
+d/opt/project/srx_test1/keys/30/94E8
+	..
+0
+d/opt/project/srx_test1/keys/30
+	94E8
+1
+d/opt/project/srx_test1/keys
+	C3
+1
+d/opt/project/srx_test1/keys/C3
+	0433
+1
+d/opt/project/srx_test1/keys/C3/0433
+	..
+0
+d/opt/project/srx_test1/keys/C3
+	0433
+1
+d/opt/project/srx_test1/keys
+	7B
+8
+d/opt/project/srx_test1
+	keys
+1
+d/opt/project
+	srx_test1
+2
+d/opt/project/srx_test1
+	keys
+1
+d/opt/project
+	gRPC_test
+1
+d/opt/project/gRPC_test
+	..
+0
+d/opt/project
+	srx_test1
+2
+d/opt/project/srx_test1
+	qsrx
+4
+d/opt/project/srx_test1/qsrx
+	ospfclient
+12
+d/opt/project/srx_test1
+	qsrx
+4
+d/opt/project/srx_test1/qsrx
+	ospfclient
+12
+d/opt/project/srx_test1
+	qsrx
+4
+d/opt/project/srx_test1/qsrx
+	ospfclient
+12
+d/opt/project/srx_test1
+	qsrx
+4
+d/opt/project/srx_test1/qsrx
+	ospfclient
+12
+d/opt/project/srx_test1
+	qsrx
+4
+d/opt/project
+	gRPC_test
+1
+d/opt/project/gRPC_test
+	..
+0
+d/opt/project
+	gRPC_test
+1
+d/opt/project/gobgp_test/gowork/src/github.com/osrg/gobgp
+	docs
+9
+d/opt/project/gobgp_test/gowork/src/github.com/osrg
+	gobgp
+1
+d/opt/project/gobgp_test/gowork/src/github.com
+	osrg
+7
+d/opt/project/gobgp_test/gowork/src
+	github.com
+2
+d/opt/project/gobgp_test/gowork
+	src
+2
+d/opt/project/gobgp_test
+	gowork
+2
+d/opt/project/gobgp_test/gowork
+	src
+2
+d/opt/project/gobgp_test/gowork/src
+	srx_grpc
+1
+d/opt/project/gobgp_test/gowork/src/srx_grpc
+	srx
+3
+d/opt/project/gobgp_test/gowork/src/srx_grpc/srx
+	tags
+7
+d/opt/project/gobgp_test/gowork/src/srx_grpc
+	srx
+3
+d/opt/project/gobgp_test/gowork/src/srx_grpc/srx
+	tags
+7
+d/opt/project/gobgp_test/gowork/src/srx_grpc
+	srx
+3
+d/opt/project/gobgp_test/gowork/src
+	srx_grpc
+1
+d/opt/project/gobgp_test/gowork
+	src
+1
+d/opt/project/gobgp_test
+	gowork
+1
+d/opt/project
+	srx_test1
+1
+d/opt/project/srx_test1
+	bgpd.conf
+9
+d/opt/project
+	srx_test1
+1
+d/opt
+	project
+1
+d/opt/project
+	srx_test1
+1
+d/users/kyehwanl
+	programming
+1
+d/users/kyehwanl/programming
+	..
+0
+d/users/kyehwanl
+	Download
+2
+d/users/kyehwanl/Download
+	..
+0
+d/users/kyehwanl
+	workspace
+3
+d/users/kyehwanl/workspace
+	Transferring
+2
+d/users/kyehwanl/workspace/Transferring
+	Documents_DesktopBackup
+1
+d/users/kyehwanl/workspace/Transferring/Documents_DesktopBackup
+	Project
+3
+d/users/kyehwanl/workspace/Transferring/Documents_DesktopBackup/Project
+	..
+0
+d/users/kyehwanl/workspace/Transferring/Documents_DesktopBackup
+	Project
+3
+d/users/kyehwanl/workspace/Transferring
+	Documents_DesktopBackup
+1
+d/users/kyehwanl/workspace
+	Transferring
+2
+d/users/kyehwanl
+	Templates
+4
+d/users/kyehwanl/Templates
+	..
+0
+d/users/kyehwanl
+	proj-program_data
+5
+d/users/kyehwanl/proj-program_data
+	..
+0
+d/users/kyehwanl
+	Documents
+6
+d/users/kyehwanl/Documents
+	etc(configuration,patch,sh)
+8
+d/users/kyehwanl/Documents/etc(configuration,patch,sh)
+	..
+0
+d/users/kyehwanl/Documents
+	DEBUGGING_NOTE
+5
+d/users/kyehwanl/Documents/DEBUGGING_NOTE
+	2017-04-27_hash_generation_issue_[SOLVED]
+3
+d/users/kyehwanl/Documents
+	Documents_InEmulab
+3
+d/users/kyehwanl/Documents/Documents_InEmulab
+	..
+0
+d/users/kyehwanl/Documents
+	Documents_InEmulab
+3
+d/users/kyehwanl
+	Emulab
+10
+d/users/kyehwanl/Emulab
+	..
+0
+d/users/kyehwanl
+	proj-program_data
+5
+d/users/kyehwanl/proj-program_data
+	..
+0
+d/users/kyehwanl
+	proj-program_data
+5
+d/opt
+	project
+1
+d/opt/project
+	exabgp_test
+2
+d/opt/project/exabgp_test
+	exabgp-3.4.13-bgpsec
+1
+d/opt/project/exabgp_test/exabgp-3.4.13-bgpsec
+	diff_exabgpsec.patch
+17
+d/opt/project/exabgp_test
+	exabgp-3.4.13-bgpsec
+1
+d/opt/project
+	srx_test1
+1
+d/opt/project/srx_test1
+	bgpd.conf.tmp2
+9
+d/opt/project
+	exabgp_test
+4
+d/opt/project/exabgp_test
+	exabgp-3.4.13-bgpsec
+1
+d/opt/project/exabgp_test/exabgp-3.4.13-bgpsec
+	flap.sh
+25
+d/opt/project/exabgp_test
+	exabgp-4.1.2
+2
+d/opt/project/exabgp_test/exabgp-4.1.2
+	lib
+10
+d/opt/project/exabgp_test
+	exabgp-3.4.13-bgpsec
+1
+d/opt/project/exabgp_test/exabgp-3.4.13-bgpsec
+	bgpd.exa.ns.conf
+10
+d/opt/project/exabgp_test
+	exabgp-4.1.2
+2
+d/opt/project/exabgp_test/exabgp-4.1.2
+	doc
+9
+d/opt/project
+	..
+0
+d
+
+# Right window history (oldest to newest):
+D/opt/project/srx_test1/api/bgpsec_openssl
+	bgpsec_openssl.c
+2
+D/users/kyehwanl/Emulab/config_and_diff_patch
+	..
+0
+D/opt/project/srx_test1/api/bgpsec_openssl
+	bgpsec_openssl.c
+2
+D/opt/project/gobgp_test
+	tools
+2
+D/opt/project/gobgp_test/tools
+	go_srx_test
+1
+D/opt/project/gobgp_test/tools/go_srx_test
+	libSRxBGPSecOpenSSL.so.3.0.0
+6
+D/opt/project/gobgp_test/gowork/src/github.com/AlekSi/cgo-by-example
+	main2.go
+5
+D/opt/project/gobgp_test/gowork/src/github.com/AlekSi
+	cgo-by-example
+1
+D/opt/project/gobgp_test/gowork/src/github.com
+	AlekSi
+1
+D/opt/project/gobgp_test/gowork/src
+	github.com
+1
+D/opt/project/gobgp_test/gowork
+	src
+2
+D/opt/project/gobgp_test
+	gowork
+1
+D/opt/project
+	gobgp_test
+1
+D/opt
+	project
+1
+D/opt/project
+	gobgp_test
+1
+D/opt/project/gobgp_test
+	gowork
+1
+D/opt/project
+	exabgp_test
+2
+D/opt/project/exabgp_test
+	exabgp-ctypes
+1
+D/opt/project/exabgp_test/exabgp-ctypes
+	Imple_libsrxbgpsec.py
+1
+D/opt/project/exabgp_test
+	exabgp-ctypes
+1
+D/opt/project
+	gobgp_test
+1
+D/opt/project/gobgp_test
+	tools
+2
+D/opt/project/gobgp_test/tools
+	exabgp-ctypes
+2
+D/opt/project/gobgp_test/tools/exabgp-ctypes
+	Imple_libsrxbgpsec.py
+1
+D/opt/project/gobgp_test/tools
+	exabgp-ctypes
+1
+D/opt/project/gobgp_test
+	tools
+2
+D/opt/project
+	exabgp_test
+2
+D/opt/project/exabgp_test
+	exabgp-ctypes
+1
+D/opt/project/exabgp_test/exabgp-ctypes
+	Imple_libsrxbgpsec.py
+1
+D/opt/project/exabgp_test
+	exabgp-ctypes
+1
+D/opt/project
+	gobgp_test
+1
+D/opt/project/gobgp_test
+	tools
+2
+D/opt/project/gobgp_test/tools
+	exabgp-ctypes
+1
+D/opt/project/gobgp_test/tools/exabgp-ctypes
+	Imple_libsrxbgpsec.py
+1
+D/opt/project/gobgp_test/tools
+	go_srx_test
+1
+D/opt/project/gobgp_test/tools/go_srx_test
+	srxcgotest.go
+3
+D/opt/project/gobgp_test/tools
+	go_srx_test
+1
+D/opt/project/gobgp_test
+	tools
+2
+D/opt/project
+	exabgp_test
+2
+D/opt/project/exabgp_test
+	exabgp-ctypes
+1
+D/opt/project/exabgp_test/exabgp-ctypes
+	libSRxBGPSecOpenSSL.so
+3
+D/opt/project/exabgp_test
+	exabgp-ctypes
+1
+D/opt/project
+	gobgp_test
+1
+D/opt/project/gobgp_test
+	tools
+1
+D/opt/project
+	gobgp_test
+1
+D/opt/project/gobgp_test
+	gowork
+2
+D/opt/project/gobgp_test/gowork
+	src
+2
+D/opt/project/gobgp_test/gowork/src
+	github.com
+1
+D/opt/project/gobgp_test/gowork/src/github.com
+	osrg
+4
+D/opt/project/gobgp_test/gowork/src/github.com/osrg
+	gobgp
+1
+D/opt/project/gobgp_test/gowork/src/github.com/osrg/gobgp
+	gobgp
+7
+D/opt/project/gobgp_test/gowork/src/github.com/osrg
+	gobgp
+1
+D/opt/project/gobgp_test/gowork/src/github.com/osrg/gobgp
+	gobgp
+7
+D/opt/project/gobgp_test/gowork/src/github.com/osrg
+	gobgp
+1
+D/opt/project/gobgp_test/gowork/src/github.com/osrg/gobgp
+	gobgp
+7
+D/opt/project/gobgp_test/gowork/src/github.com/osrg
+	gobgp
+1
+D/opt/project/gobgp_test/gowork/src/github.com/osrg/gobgp
+	make_gotags.sh
+15
+D/opt/project/gobgp_test/gowork/src/github.com/osrg
+	gobgp
+1
+D/opt/project/gobgp_test/gowork/src/github.com/osrg/gobgp
+	gobgpd
+3
+D/opt/project/gobgp_test/gowork/src/github.com/osrg/gobgp/gobgpd
+	main.go
+1
+D/opt/project/gobgp_test/gowork/src/github.com/osrg/gobgp
+	api
+5
+D/opt/project
+	..
+0
+D/opt/project/exabgp_test/exabgp-ctypes
+	libSRxBGPSecOpenSSL.so
+3
+D/opt/project/exabgp_test
+	exabgp-ctypes
+1
+D/opt/project
+	exabgp_test
+6
+D/opt
+	project
+1
+D/opt/project
+	gobgp_test
+3
+D/opt/project/gobgp_test
+	gowork
+2
+D/opt/project/gobgp_test/gowork
+	bin
+1
+D/opt/project/gobgp_test/gowork/bin
+	config
+4
+D/opt/project/gobgp_test/gowork
+	bin
+1
+D/opt/project/gobgp_test
+	gowork
+2
+D/opt/project
+	exabgp-3.4.13
+2
+D/opt/project/exabgp-3.4.13
+	bgpd.exa.conf
+10
+D/opt/project
+	gRPC_test
+1
+D/opt/project/gRPC_test
+	..
+0
+D/opt/project
+	gRPC_test
+1
+D/opt/project/gRPC_test
+	grpc
+4
+D/opt/project/gRPC_test/grpc
+	..
+0
+D/opt/project/gRPC_test
+	srxapi_grpc
+3
+D/opt/project
+	gobgp_test
+4
+D/opt/project/gobgp_test
+	gowork
+1
+D/opt/project/gobgp_test/gowork
+	src
+1
+D/opt/project/gobgp_test/gowork/src
+	google.golang.org
+2
+D/opt/project/gobgp_test/gowork/src/google.golang.org
+	grpc
+2
+D/opt/project/gobgp_test/gowork/src/google.golang.org/grpc
+	picker_wrapper_test.go
+58
+D/opt
+	project
+1
+D/opt/project
+	srx_test1
+1
+D/opt/project/srx_test1
+	_inst
+8
+D/opt/project/srx_test1/_inst
+	etc
+1
+D/opt/project/srx_test1/_inst/etc
+	srx_server.conf
+11
+D/opt/project/srx_test1/_inst
+	etc
+1
+D/opt/project/srx_test1
+	qsrx
+1
+D/opt/project
+	srx_test1
+3
+D/opt/project/srx_test1
+	qsrx
+1
+D/opt/project
+	exabgp_test
+1
+D/opt/project/exabgp_test
+	..
+0
+D/opt/project
+	exabgp_test
+1
+D/opt/project/exabgp_test
+	..
+0
+D/opt/project
+	..
+0
+D
+
+# Command line history (oldest to newest):
+:mkdir test_install
+:mkdir project
+:!sudo mkdir project
+:mkdir docker
+:find start.sh
+:!sudo chown kyehwanl.admin -R %f
+:!sudo chown kyehwan %f
+:!sudo chown kyehwanl %f
+:!scp -r %f idac-server12:/opt/project
+:!!scp -r %f idac-server11:/opt/project
+:cd /opt/project/gobgp_test/gowork/src/github.com/osrg/gobgp/server
+:!!env | grep go
+:!scp %f 172.17.0.3:/tmp
+:touch README
+:cd .vim
+:!cp /tmp/pathogen.vim ./
+:find MsgData
+:grep MsgData
+:find vim-go
+:cd ~/.vim
+:!vim ~/.vimrc.local2
+:cd ~/Emulab/
+:grep make-linuxrepo
+:!scp %f node1.bs1.bgp-srx.emulab2.antd.nist.gov:/tmp/Dockerfile_perf-test-quagga
+:!scp %f node1.bs1.bgp-srx.emulab2.antd.nist.gov:/tmp/
+:cd /etc/pki
+:!sudo mv %f %f.bkup
+:grep iproute
+:grep iptable 
+:mkdir nccoe_test
+:grep sed
+:grep NewOptionParameterCapability
+:grep NewGlobalCmd
+:grep h.msgCh.In
+:grep h.msgCh
+:grep channels.InfiniteChannel
+:grep GobgpApiClient
+:grep NewRootCmd
+:grep type Path struct
+:grep AddPath
+:grep func AddPath
+:grep AddPath.*(
+:grep \ AddPath.*(
+:grep \<NewFSMHandler
+:grep sendMessageloop
+:grep NewFSM
+:grep NewFSM\/>
+:grep NewFSM\>
+:grep NewPeer
+:grep \<NewPeer\>
+:grep \<AddNeighbor\>
+:grep UpdateNeighbor
+:grep New
+:grep \<New\>
+:find *_test.go
+:mkdir gobgp-copy
+:!mv %f ./gobgp-copy/
+:mkdir gowork
+:touch capture_list
+:grep "go_out=plugings"
+:grep go_out
+:grep protoc
+:diff
+:!!df -h
+:!!tar cvfz %f-backup-vm005-20180905.tar.gz %f
+:pwd
+:grep NewPathAttributeOrigin
+:grep \<NewPathAttributeOrigin\>
+:Grep \<Eqaul\>(
+:Grep \<Eqaul (
+:grep \<Eqaul\> (
+:grep \<Eqaul(
+:grep \<Equal\> ( 
+:grep \<Equal\> 
+:!!go get -gcflags='-N -l' ./...
+:!vim ~/.vimrc
+:!!nm %f | grep _sign
+:!!strings %f | grep _sign
+:mkdir AlekSi
+:!!python %f
+:!!find ./ -name '*.go' -exec diff -wibup {} /opt/project/gobgp_test/gowork/src/github.com/osrg/gobgp/{} \; | less
+:!!ldd %f
+:run
+:sy
+:!cp /tmp/cap_wireshark_gobgp_bgpsec_update_1002_2018.pcapng ./
+:set -g status-colour 
+:cd /tmp
+:cd /etc/docker/
+:cd /opt/project/gobgp_test/gowork/src/srx_grpc/srx/src
+:sp
+:grep ServerStream
+:!!rsync -avPuniz %f /tmp/
+:!!rsync -avPuiz %f /tmp/
+:cd /tmp/
+:du
+:!rm -rf %f
+:!cp /tmp/bgpd.conf.1k ./
+:!cp /tmp/bgpd.orig.500k.conf ./
+:cd /opt
+:cd
+:q
+
+# Search history (oldest to newest):
+/conf
+/libconfig
+/attr
+/docke
+/docker
+/pyhon
+/compose
+/Makefile.am
+/Makefile
+/quagga.texi
+/basic
+/quagga.
+/libSRx
+/ipt
+/iptable
+/osrg
+/\.h
+/\
+/current
+/ldd
+/vimrc
+/config
+/config.kkkkk
+/configure.ac
+/vim-go
+/a
+/179
+/README
+/install
+/packet
+/bgp
+/packet-bgp.c
+/packet-rp
+/pcap
+/wireshark
+/rtr
+/httpd
+/http
+/bgperf
+/find
+/make_cscope
+/rsync
+/bgpd
+/rpki
+/bgpd.conf.
+/main
+/smoke
+/smoketest
+/POW
+/git
+/vim
+/yum
+/vpn
+/macro
+/tip_command
+/patricia
+/bashrc
+/!lkkkkk
+/proj-bgp
+/proj
+/ssh
+/tmux
+/bird
+/ope
+/history
+/tip_
+/rpm
+/make
+/quaggasrx
+/quagga
+/va
+/call
+/bgpsec
+/emul
+/emulab
+/vifm
+/cron
+/mkdir
+/openssl
+/config.log
+/python
+/iris
+/sample
+/dependencies
+/import
+/panda
+/def
+/pandas
+/pep8
+/pythn
+/cscope
+/tmp
+/tm
+/go
+/sy
+/bundle
+/empty
+/exa
+/cap_j
+/wire
+/perl
+/tip
+/tip_comm
+/sed
+/generate
+/701
+/\~
+/stret
+/func
+/_test
+/sirup
+/mi
+/valid
+
+# Prompt history (oldest to newest):
+pinput-expect-kyehwanlee_repo.sh
+pbgpsec_openssl.c
+pgobgp_sync_kyehwanlee_repo_vm005.sh
+pgobgp_sync_klee_repo.sh
+pREADME.template.md
+pgobgp_sync_klee_repo_vm005.sh
+pexabgp_sync_klee_repo_vm005.sh
+pdiff_svn_gitlab_qsrx_05152020.patch
+pdiff_svn_github_srxcryptoapi_05152020.patch
+pdiff_svn_github_srx-server_05152020.patch
+pdiff_svn_github_qsrx_05152020.patch
+pdiff_github_svn_srxcryptoapi_05152020.patch
+pdiff_github_svn_srx-server_05152020.patch
+pdiff_github_svn_qsrx_05152020.patch
+pqsrx.bgpd.n2.conf.bgpsec
+pqsrx.bgpd.conf
+pquaggasrx.bgpd.conf
+pgobgpd.docker.conf
+pquaggasrx.docker.conf
+psrxcryptoapi.conf
+pbgpsec-compose.yml
+pdocker-compose.orig.yml
+pdocker-compose.new.yml
+pdocker-compose.yml.bkup
+pdocker-compose.yml.current
+pdocker-compose.yml
+pdocker-compose.yml.orig
+pdocker-compose.yml.new2
+psrx2
+pexabgp.nsBase.conf
+pcompose_test
+pbgpd.conf.bgpsec.n1
+pbgpd.conf.compose.bgpsec.n2
+pbgpd.conf.compose.bgpsec.n1
+pdiff_gobgp_master_0218_2020.patch
+pca.crt.old
+pca.cert
+psrx_grpc
+pexabgp-3.4.13_old
+pgobgp_orig
+psrxapi_server.go
+psrxapi_grpc
+psrxapi
+psrxapi.proto
+pMakefile_bkup4go
+pbgpsecio.conf.mod1
+pbgpd.conf.mod
+pkaraf.bgp.log
+pkaraf.bgp.log.tmp
+pgithub_sync.sh
+pgithub_sync_vm005.sh
+psrx_test2-tmp
+psrx_test2_from_tmp
+psrx_test1_from_tmp
+pqsrx-rpms-enabled
+pqsrx
+ppacket-rpkirtr.c
+pREADME-devel
+pdiff-check_openssl_m4.patch
+psrx_test1
+pnet_emulator.py
+pnet_generate_bgpsec.sh
+pbgpd.conf.n2.bgpsec
+pnetns_generate_bgpsec_echo.sh
+pbgpd.conf.n1
+pbgpd.conf.n2
+pnode2.bgpsec.ipv6.conf
+pnode1.bgpsec.ipv6.conf
+pnode2.bgpsec..conf
+pnode1.bgpsec.conf
+pnode2.bgpsec.conf
+pASN_exp_data
+pproj-program_data
+p_bash_aliases
+p_vimrc.local
+p_vimrc
+p_screenrc
+p_gitignore
+p_gitconfig
+p_bashrc
+pprofile-data
+pgitlab_upload
+pcrontab_cmd.sh
+ptemp
+pnetns_nodes_generate.sh
+pnetns_generate_bgpsec.sh
+pnet_emulator.sh
+pprefix_gen.py
+pnet_emulator_orig.py
+pnet_emulator_orig_ver.py
+p_inst_old
+pvim.bash-bkup-emulab-20130221.tar.gz
+pbgpd.conf.node011
+pbgpd.conf.node005
+pconfig_command_wireshark.sh
+pbgpd2.conf
+pdocker_run.py
+pexabgp-ctypes
+pgowork_bgpsec{1,2}
+pgowork_bgpsec1_2
+pcap_wireshark_bgpsec_message-open-update-20180105.pcapng
+pgobgp-copy_20180830
+pgobgp.pb.go_new
+pgobgp.pb.go.orig
+pgobgp.pb.go
+pbgpd.conf.500k
+
+# Local filter history (oldest to newest):
+
+# Registers:
+
+# Directory stack (oldest to newest):
+
+# Trash content:
+t/users/kyehwanl/.vifm/Trash/000__inst
+	/opt/project/srx_test1/_inst
+t/users/kyehwanl/.vifm/Trash/000_tm-library
+	/opt/project/tm-library
+t/users/kyehwanl/.vifm/Trash/000_Documents_InEmulab
+	/users/kyehwanl/Emulab/Documents_InEmulab
+t/users/kyehwanl/.vifm/Trash/000_config_and_diff_patch
+	/users/kyehwanl/config_and_diff_patch
+t/users/kyehwanl/.vifm/Trash/000_quagga-test2
+	/opt/project/docker_test/perf-test/quagga-test2
+t/temp/.vifm-Trash-40021/000_quaggasrx-0.4.2.7-22.el7.centos.x86_64.rpm
+	/temp/proj-bgp/srx-repo/quaggasrx-0.4.2.7-22.el7.centos.x86_64.rpm
+t/temp/.vifm-Trash-40021/000_quaggasrx-devel-0.4.2.7-22.el7.centos.x86_64.rpm
+	/temp/proj-bgp/srx-repo/quaggasrx-devel-0.4.2.7-22.el7.centos.x86_64.rpm
+t/temp/.vifm-Trash-40021/001_quaggasrx-0.4.2.7-22.el7.centos.x86_64.rpm
+	/temp/proj-bgp/srx-repo/quaggasrx-0.4.2.7-22.el7.centos.x86_64.rpm
+t/temp/.vifm-Trash-40021/002_quaggasrx-0.4.2.7-22.el7.centos.x86_64.rpm
+	/temp/proj-bgp/srx-repo/quaggasrx-0.4.2.7-22.el7.centos.x86_64.rpm
+t/temp/.vifm-Trash-40021/000_quaggasrx-0.4.2.7-22.el7.centos.src.rpm
+	/temp/proj-bgp/srx-repo/quaggasrx-0.4.2.7-22.el7.centos.src.rpm
+t/temp/.vifm-Trash-40021/003_quaggasrx-0.4.2.7-22.el7.centos.x86_64.rpm
+	/temp/proj-bgp/srx-repo/quaggasrx-0.4.2.7-22.el7.centos.x86_64.rpm
+t/temp/.vifm-Trash-40021/000_srx-0.5.1.0-1.el7.centos.x86_64.rpm
+	/temp/proj-bgp/srx-repo/srx-0.5.1.0-1.el7.centos.x86_64.rpm
+t/temp/.vifm-Trash-40021/000_srx-proxy-0.5.1.0-1.el7.centos.x86_64.rpm
+	/temp/proj-bgp/srx-repo/srx-proxy-0.5.1.0-1.el7.centos.x86_64.rpm
+t/temp/.vifm-Trash-40021/000_srx-proxy-devel-0.5.1.0-1.el7.centos.x86_64.rpm
+	/temp/proj-bgp/srx-repo/srx-proxy-devel-0.5.1.0-1.el7.centos.x86_64.rpm
+t/temp/.vifm-Trash-40021/000_srxcryptoapi-0.3.0.0-1.el7.centos.x86_64.rpm
+	/temp/proj-bgp/srx-repo/srxcryptoapi-0.3.0.0-1.el7.centos.x86_64.rpm
+t/temp/.vifm-Trash-40021/000_srxcryptoapi-devel-0.3.0.0-1.el7.centos.x86_64.rpm
+	/temp/proj-bgp/srx-repo/srxcryptoapi-devel-0.3.0.0-1.el7.centos.x86_64.rpm
+t/users/kyehwanl/.vifm-Trash-40021/000_go.vim
+	/users/kyehwanl/.vim/syntax/go.vim
+t/users/kyehwanl/.vifm-Trash-40021/000_plug.vim
+	/users/kyehwanl/.vim/autoload/plug.vim
+t/users/kyehwanl/.vifm-Trash-40021/000_vimgo.vim
+	/users/kyehwanl/.vim/syntax/vimgo.vim
+t/users/kyehwanl/.vifm-Trash-40021/001_go.vim
+	/users/kyehwanl/.vim/plugin/go.vim
+t/users/kyehwanl/.vifm-Trash-40021/002_go.vim
+	/users/kyehwanl/.vim/plugin/go.vim
+t/temp/.vifm-Trash-40021/000_srxcryptoapi-0.3.0.0.tar.gz
+	/temp/proj-bgp/srx-repo/srxcryptoapi-0.3.0.0.tar.gz
+t/temp/.vifm-Trash-40021/001_srxcryptoapi-0.3.0.0-1.el7.centos.x86_64.rpm
+	/temp/proj-bgp/srx-repo/srxcryptoapi-0.3.0.0-1.el7.centos.x86_64.rpm
+t/users/kyehwanl/.vifm/Trash/000_srxcryptoapi-0.3.0.0.tar.gz
+	/opt/project/srx_test1_from_tmp/api/srxcryptoapi-0.3.0.0.tar.gz
+t/users/kyehwanl/.vifm/Trash/000_gowork
+	/opt/project/gowork
+t/users/kyehwanl/.vifm/Trash/000_gobgp.pb.go
+	/opt/project/gobgp_test/gowork/src/github.com/osrg/gobgp/api/gobgp.pb.go
+t/users/kyehwanl/.vifm/Trash/000_github.com-backup-vm005-20180905.tar.gz
+	/opt/project/gobgp_test/gowork/src/github.com-backup-vm005-20180905.tar.gz
+t/users/kyehwanl/.vifm/Trash/001_libSRxBGPSecOpenSSL.so.3.0.0
+	/opt/project/gobgp_test/tools/go_srx_test/libSRxBGPSecOpenSSL.so.3.0.0
+t/users/kyehwanl/.vifm/Trash/000_diffs_gobgp
+	/opt/project/gobgp_test/gowork/src/github.com/osrg/gobgp/diffs_gobgp
+t/users/kyehwanl/.vifm/Trash/001_diffs_gobgp
+	/opt/project/gobgp_test/gobgpsec/diffs_gobgp
+t/users/kyehwanl/.vifm/Trash/000_libSRxCryptoAPI.so.3.0.0
+	/opt/project/gobgp_test/tools/libSRxCryptoAPI.so.3.0.0
+t/users/kyehwanl/.vifm/Trash/000_libSRxBGPSecOpenSSL.so
+	/opt/project/gobgp_test/tools/libSRxBGPSecOpenSSL.so
+t/users/kyehwanl/.vifm/Trash/000_libSRxBGPSecOpenSSL.so.3.0.0
+	/opt/project/gobgp_test/tools/libSRxBGPSecOpenSSL.so.3.0.0
+t/users/kyehwanl/.vifm/Trash/000_srxcryptoapi.h
+	/opt/project/gobgp_test/tools/srxcryptoapi.h
+t/users/kyehwanl/.vifm/Trash/000_srxcgotest.go
+	/opt/project/gobgp_test/tools/go_test/srxcgotest.go
+t/users/kyehwanl/.vifm/Trash/002_libSRxBGPSecOpenSSL.so.3.0.0
+	/opt/project/srx_test1/_inst/lib64/srx/libSRxBGPSecOpenSSL.so.3.0.0
+t/users/kyehwanl/.vifm/Trash/001_libSRxCryptoAPI.so.3.0.0
+	/opt/project/srx_test1/_inst/lib64/srx/libSRxCryptoAPI.so.3.0.0
+t/users/kyehwanl/.vifm/Trash/001_temp
+	/opt/project/temp
+t/users/kyehwanl/.vifm-Trash-40021/000_VirtualBox-6.0.4-128413-Linux_amd64.run
+	/users/kyehwanl/Download/VirtualBox-6.0.4-128413-Linux_amd64.run
+t/users/kyehwanl/.vifm-Trash-40021/000_ONOS
+	/users/kyehwanl/VirtualBox VMs/ONOS
+t/users/kyehwanl/.vifm/Trash/000_srxImple.go
+	/opt/project/gobgp_test/gowork/src/srx/srxImple.go
+t/users/kyehwanl/.vifm/Trash/001_srxImple
+	/opt/project/gRPC_test/go_grpc/srxImple
+t/users/kyehwanl/.vifm/Trash/000_srx
+	/opt/project/gobgp_test/gowork/src/srx
+t/users/kyehwanl/.vifm/Trash/001_srx.pb.go
+	/opt/project/gobgp_test/gowork/src/srxapi/srx.pb.go
+t/users/kyehwanl/.vifm/Trash/000_Makefile_bkup4go
+	/opt/project/gobgp_test/gowork/src/srxapi/srx/src/Makefile_bkup4go
+t/users/kyehwanl/.vifm/Trash/000_tmux-2.8
+	/tmp/tmux-Ra1eP/tmux-2.8
+t/users/kyehwanl/.vifm/Trash/001_tmux-2.8
+	/tmp/tmux-2.8
+t/users/kyehwanl/.vifm/Trash/000_tmux-2.8.tar.gz
+	/tmp/tmux-2.8.tar.gz
+t/users/kyehwanl/.vifm/Trash/000_bin
+	/opt/project/bin
+t/users/kyehwanl/.vifm/Trash/000_lib
+	/opt/project/lib
+t/users/kyehwanl/.vifm/Trash/000_ssl
+	/opt/project/ssl
+t/users/kyehwanl/.vifm/Trash/000_include
+	/opt/project/include
+t/users/kyehwanl/.vifm/Trash/001_bin
+	/opt/project/bin
+t/users/kyehwanl/.vifm/Trash/001_lib
+	/opt/project/lib
+t/users/kyehwanl/.vifm/Trash/001_ssl
+	/opt/project/ssl
+t/users/kyehwanl/.vifm/Trash/001_include
+	/opt/project/include
+t/users/kyehwanl/.vifm/Trash/000_mininet
+	/opt/project/SDN_test/mininet
+t/users/kyehwanl/.vifm/Trash/000_cryptobgpsec.pyc
+	/opt/project/exabgp_test/exabgp-3.4.13/lib/exabgp/cryptobgpsec.pyc
+t/users/kyehwanl/.vifm/Trash/000_exabgp-pdb-breakpoints.log
+	/opt/project/exabgp_test/exabgp-3.4.13-bgpsec/exabgp-pdb-breakpoints.log
+t/users/kyehwanl/.vifm/Trash/000_callgrind.out.27356
+	/opt/project/exabgp_test/exabgp-3.4.13-bgpsec/callgrind.out.27356
+t/users/kyehwanl/.vifm/Trash/000_callgrind.out.27357
+	/opt/project/exabgp_test/exabgp-3.4.13-bgpsec/callgrind.out.27357
+t/users/kyehwanl/.vifm/Trash/000_callgrind.out.27358
+	/opt/project/exabgp_test/exabgp-3.4.13-bgpsec/callgrind.out.27358
+t/users/kyehwanl/.vifm/Trash/000_callgrind.out.27359
+	/opt/project/exabgp_test/exabgp-3.4.13-bgpsec/callgrind.out.27359
+t/users/kyehwanl/.vifm/Trash/000_callgrind.out.27360
+	/opt/project/exabgp_test/exabgp-3.4.13-bgpsec/callgrind.out.27360
+t/users/kyehwanl/.vifm/Trash/000_callgrind.out.27361
+	/opt/project/exabgp_test/exabgp-3.4.13-bgpsec/callgrind.out.27361
+t/users/kyehwanl/.vifm/Trash/000_callgrind.out.27362
+	/opt/project/exabgp_test/exabgp-3.4.13-bgpsec/callgrind.out.27362
+t/users/kyehwanl/.vifm/Trash/000_callgrind.out.27363
+	/opt/project/exabgp_test/exabgp-3.4.13-bgpsec/callgrind.out.27363
+t/users/kyehwanl/.vifm/Trash/003_libSRxBGPSecOpenSSL.so.3.0.0
+	/opt/project/srx_test1/_inst/lib/srx/libSRxBGPSecOpenSSL.so.3.0.0
+t/users/kyehwanl/.vifm/Trash/000_srx_grpc_tmp
+	/tmp/srx_grpc_tmp
+t/users/kyehwanl/.vifm/Trash/000_srx_test-compose0.yml
+	/opt/project/docker_test/srx/compose_test/srx_test-compose0.yml
+t/users/kyehwanl/.vifm/Trash/002_quaggasrx-0.4.2.7.tar.gz
+	/opt/project/TestBgpsecImple/rpms/quaggasrx-0.4.2.7.tar.gz
+t/users/kyehwanl/.vifm/Trash/000_diff_svn_github_srxcryptoapi_05152020.patch
+	/opt/project/TestBgpsecImple/diff_svn_github_srxcryptoapi_05152020.patch
+t/users/kyehwanl/.vifm/Trash/000_diff_svn_github_srx-server_05152020.patch
+	/opt/project/TestBgpsecImple/diff_svn_github_srx-server_05152020.patch
+t/users/kyehwanl/.vifm/Trash/000_diff_svn_github_qsrx_05152020.patch
+	/opt/project/TestBgpsecImple/diff_svn_github_qsrx_05152020.patch
+t/users/kyehwanl/.vifm/Trash/000_diff_svn_gitlab_qsrx_05182020.patch
+	/opt/project/NIST-BGP-SRx/diff_svn_gitlab_qsrx_05182020.patch
+t/users/kyehwanl/.vifm/Trash/000_diff_svn_gitlab_srx-server_05182020.patch
+	/opt/project/NIST-BGP-SRx/diff_svn_gitlab_srx-server_05182020.patch
+t/users/kyehwanl/.vifm/Trash/000_diff_svn_gitlab_srxcryptoapi_05182020.patch
+	/opt/project/NIST-BGP-SRx/diff_svn_gitlab_srxcryptoapi_05182020.patch
+t/users/kyehwanl/.vifm/Trash/000_diff_svn_gitlab_srxcryptoapi_05152020.patch
+	/opt/project/NIST-BGP-SRx/diff_svn_gitlab_srxcryptoapi_05152020.patch
+t/users/kyehwanl/.vifm/Trash/000_diff_svn_gitlab_srx-server_05152020.patch
+	/opt/project/NIST-BGP-SRx/diff_svn_gitlab_srx-server_05152020.patch
+t/users/kyehwanl/.vifm/Trash/000_diff_svn_gitlab_qsrx_05152020.patch
+	/opt/project/NIST-BGP-SRx/diff_svn_gitlab_qsrx_05152020.patch
+t/users/kyehwanl/.vifm/Trash/001_diff_svn_gitlab_qsrx_05152020.patch
+	/tmp/SRxTest/diff_svn_gitlab_qsrx_05152020.patch
+t/users/kyehwanl/.vifm/Trash/001_diff_svn_gitlab_srx-server_05152020.patch
+	/tmp/SRxTest/diff_svn_gitlab_srx-server_05152020.patch
+t/users/kyehwanl/.vifm/Trash/001_diff_svn_gitlab_srxcryptoapi_05152020.patch
+	/tmp/SRxTest/diff_svn_gitlab_srxcryptoapi_05152020.patch
+t/users/kyehwanl/.vifm/Trash/000_ski-list.txt.orig
+	/opt/project/docker_test/bgpsecImples/keys/ski-list.txt.orig
+t/users/kyehwanl/.vifm/Trash/000_priv-ski-list.txt.orig
+	/opt/project/docker_test/bgpsecImples/keys/priv-ski-list.txt.orig
+t/users/kyehwanl/.vifm/Trash/000_ski-list.txt.old
+	/opt/project/docker_test/bgpsecImples/keys/ski-list.txt.old
+t/users/kyehwanl/.vifm/Trash/000_README
+	/opt/project/TestBgpsecImple/README
+t/users/kyehwanl/.vifm/Trash/000_README.md
+	/opt/project/git.repo/README.md
+t/users/kyehwanl/.vifm-Trash-40021/000_README.md
+	/users/kyehwanl/README.md
+t/users/kyehwanl/.vifm/Trash/001_README
+	/opt/project/git.repo/README
+t/users/kyehwanl/.vifm/Trash/000_README_gobgp.md
+	/opt/project/git.repo/gobgpsec_nist_repo/README_gobgp.md
+t/users/kyehwanl/.vifm/Trash/000_gobgp_sync_klee_repo_vm005.sh
+	/opt/project/exabgp_test/exabgp-4.1.2/gobgp_sync_klee_repo_vm005.sh
+t/users/kyehwanl/.vifm/Trash/000_README_exabgp.md
+	/opt/project/git.repo/exabgpsec_nist_repo/README_exabgp.md
+t/users/kyehwanl/.vifm-Trash-40021/000_exabgp_sync_klee_repo_vm.sh
+	/users/kyehwanl/exabgp_sync_klee_repo_vm.sh
+t/users/kyehwanl/.vifm/Trash/000_gobgp_sync_klee_repo_vm.sh
+	/opt/project/gobgp_test/gobgp_v2_running_test/src/github.com/osrg/gobgp/gobgp_sync_klee_repo_vm.sh
+
+# State:
+f(\.([Pl])?o|\.a|out|.*~)$
+i1
+[.1
+[F
+F(\.([Pl])?o|\.a|out|.*~)$
+I1
+].1
+]F
+s0
