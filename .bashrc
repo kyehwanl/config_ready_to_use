@@ -87,8 +87,8 @@ LS_COLORS='di=38;5;27:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;3
 
 #export DISPLAY=:11.0
 
-export TERM=xterm-256color   # without this setting, shell file coloring becomes weird
-#export TERM=screen-256color
+#export TERM=xterm-256color   # without this setting, shell file coloring becomes weird
+export TERM=screen-256color
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/users/kyehwanl/Download/libevent-2.0.21-stable/_inst/usr/local/lib"
 
 if [ -f ~/.go ]; then

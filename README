@@ -1,1 +1,35 @@
-Following are the configs and basic application on NIST f6 server
+Following are the configs and basic application for the development environment
+
+
+Contents
+========
+Vim
+tmux
+screen
+vifm
+etc
+
+
+Steps
+=====
+0. Install utils and libraries
+    yum -y install epel-release tmux vim ctags cscope gcc automake autoconf libtool net-tools psmisc patch wget
+
+1. git cloning into any place
+
+2. copy all the contents including hidden files into the account root directory
+    - it may need to disable the default aliasing (alias cp='cp -i'),
+      which will stop to ask a confirmation when overwriting.
+    - for example, 
+        yes | cp -rf xxx yyy
+        or 
+        unalias cp
+
+3. extract _.vimXXX.tar.gz into the root directory
+
+4. set the evn variable, TERM, to have colors
+    (for example)
+    - export TERM=screen-256color
+
+5. source .bashrc and .bash_xxx to apply changes
+    
