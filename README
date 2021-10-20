@@ -33,3 +33,15 @@ Steps
 
 5. source .bashrc and .bash_xxx to apply changes
     
+
+
+
+Troubleshoot
+=============
+
+1. in Vifm, hitting 's' goes to open bash shell, but sometimes it opens 'sh'.
+    Theh, go to .vifm/vifmrc, change the  shell command like following lines
+
+    " Start shell in current directory 
+    "nnoremap s :shell<cr>             
+    nnoremap s :!bash<cr>
