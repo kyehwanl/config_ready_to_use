@@ -53,9 +53,11 @@ fi
 
 prefix=`hostname | sed -e 's/\./-/' -e 's/\..*//' -e 's/-/\./'`
 suffix="-> "
-#
+
 function set_prompt() {
-  PS1="$prefix [\!]{`dirs|sed -e 's| .*||' -e 's|.*[^/]\(/[^/]*/[^/]*\)|...\1|'`}$suffix" 
+  #PS1="$prefix [\!]{`dirs|sed -e 's| .*||' -e 's|.*[^/]\(/[^/]*/[^/]*\)|...\1|'`}$suffix" 
+  PS1="\e[01;32m\h\e[m\e[01;38m [\!]{`dirs|sed -e 's| .*||' -e 's|.*[^/]\(/[^/]*/[^/]*\)|...\1|'`}\e[m\$ "
+  #PS1="\[\033[01;32m\]\h\[\033[00m\]\[\033[01;38m\] [\!]{`dirs|sed -e 's| .*||' -e 's|.*[^/]\(/[^/]*/[^/]*\)|...\1|'`}\[\033[00m\]\$ "
 }
 
 PROMPT_COMMAND=set_prompt
@@ -102,3 +104,6 @@ export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.181-3.b13.el7_5.x86_64/jr
 docker-ip() {
   sudo docker inspect --format '{{ .NetworkSettings.IPAddress }}' "$@"
 }
+
+# Created by `userpath` on 2021-10-25 04:45:30
+export PATH="$PATH:/users/kyehwanl/.local/bin"
