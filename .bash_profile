@@ -33,3 +33,6 @@ pid=$(ps ax | grep "$1" | grep -v grep | awk '{ print $1 }')
 echo -e "terminating '$1' / process(es):\n$pid"
 kill -SIGTERM $pid
 }
+
+# Created by `userpath` on 2021-10-25 04:45:30
+export PATH="$PATH:/users/kyehwanl/.local/bin"

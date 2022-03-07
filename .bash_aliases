@@ -17,6 +17,7 @@ alias gl='git lgodb'
 alias gs='git status'
 alias gd='git diff -w -b'
 alias qq='exit'
+alias docker='sudo docker'
 
 
 # Function which adds an alias to the current shell and to

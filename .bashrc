@@ -56,8 +56,8 @@ suffix="-> "
 
 function set_prompt() {
   #PS1="$prefix [\!]{`dirs|sed -e 's| .*||' -e 's|.*[^/]\(/[^/]*/[^/]*\)|...\1|'`}$suffix" 
-  PS1="\e[01;32m\h\e[m\e[01;38m [\!]{`dirs|sed -e 's| .*||' -e 's|.*[^/]\(/[^/]*/[^/]*\)|...\1|'`}\e[m\$ "
-  #PS1="\[\033[01;32m\]\h\[\033[00m\]\[\033[01;38m\] [\!]{`dirs|sed -e 's| .*||' -e 's|.*[^/]\(/[^/]*/[^/]*\)|...\1|'`}\[\033[00m\]\$ "
+  #PS1="\[\e[01;32m\h\e[m\]\[\e[01;38m [\!]{`dirs|sed -e 's| .*||' -e 's|.*[^/]\(/[^/]*/[^/]*\)|...\1|'`}\e[m\]\$ "
+  PS1="\[\033[01;32m\]\h\[\033[00m\]\[\033[01;38m\] [\!]{`dirs|sed -e 's| .*||' -e 's|.*[^/]\(/[^/]*/[^/]*\)|...\1|'`}\[\033[00m\]\$ "
 }
 
 PROMPT_COMMAND=set_prompt
@@ -107,3 +107,20 @@ docker-ip() {
 
 # Created by `userpath` on 2021-10-25 04:45:30
 export PATH="$PATH:/users/kyehwanl/.local/bin"
+
+# --- Kubernetes Setting ----
+if [ -f ~/.kubectl_bash_completion ]; then
+    source ~/.kubectl_bash_completion
+fi
+#export KUBECONFIG=$HOME/.kube/config2
+#source /etc/profile.d/bash_completion.sh
+#source <(kubectl completion bash)
+#alias k=kubectl
+#source <(kubectl completion bash | sed s/kubectl/k/g)
+
+
+
+
+
+
+
