@@ -110,7 +110,10 @@ export PATH="$PATH:/users/kyehwanl/.local/bin"
 
 # --- Kubernetes Setting ----
 if [ -f ~/.kubectl_bash_completion ]; then
+  if command -v kubectl &> /dev/null
+  then
     source ~/.kubectl_bash_completion
+  fi
 fi
 #export KUBECONFIG=$HOME/.kube/config2
 #source /etc/profile.d/bash_completion.sh
