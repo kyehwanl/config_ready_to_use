@@ -131,3 +131,22 @@ VIM quick setup with color scheme - soloarized
 
     - copy the following line into .bashrc or .bash_profile
     export TERM=screen-256color    
+
+
+
+
+
+Docker CE install
+=================
+
+    yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+    yum install -y docker-ce
+
+
+
+
+
+
+
+
+

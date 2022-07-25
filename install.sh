@@ -2,6 +2,7 @@
 
 yum -y install epel-release 
 yum -y install tmux vim vifm ctags cscope gcc automake autoconf libtool net-tools psmisc patch wget
+yum -y install go
 cd ~/
 git clone https://github.com/kyehwanl/config_ready_to_use.git
 unalias cp
