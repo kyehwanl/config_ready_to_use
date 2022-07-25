@@ -12,6 +12,11 @@ etc
 
 Steps
 =====
+
+* install.sh file includes following steps, so just try
+    [sudo] install.sh  <-- Need root permission to install
+
+
 0. Install utils and libraries
     yum -y install epel-release tmux vim ctags cscope gcc automake autoconf libtool net-tools psmisc patch wget
 
