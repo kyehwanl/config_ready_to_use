@@ -7,6 +7,7 @@
     " --- Open the definition in a vertical split (ex. ctrl-W ctrl-]:  horizontal split)
     map <leader>] :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
+    nnoremap <leader>... :q<CR>
 " }
 
 " vimdiff option - ignore white space

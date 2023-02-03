@@ -561,6 +561,7 @@ command! SmallerFont call SmallerFont()
     Bundle 'vim-go'
     Bundle 'Lokaltog/vim-powerline'
     Bundle 'majutsushi/tagbar'
+    ""Bundle 'nathanaelkane/vim-indent-guides' and then BundleInstall
 
 " }
 
@@ -1044,4 +1045,55 @@ command! SmallerFont call SmallerFont()
         endif
     endif
 " }
+
+
+" Auto Background change {
+  function! AutoSetSolarized()"
+  " Auto change by time
+  " https://www.vim.org/scripts/script.php?script_id=5210
+    let current_time = strftime("%H:%M")
+      ""echo current_time
+    if current_time > "17:00"
+      set background=dark
+    elseif current_time < "07:00"
+      set background=dark
+    else
+      set background=light
+    endif
+	if filereadable(expand("~/.vim/pack/themes/opt/solarized8/colors/solarized8_high.vim"))
+	  colorscheme solarized8_high
+	else 
+      colorscheme solarized
+	endif
+  endfunction"
+
+
+  let g:solarized_termtrans=0
+
+  if exists("g:loaded_autoSolarized_autoloader")
+    finish
+  endif
+  let g:loaded_autoSolarized_autoload = 1
+
+
+  noremap <Leader>sc :call AutoSetSolarized()<CR>
+  "autocmd VimEnter * call AutoSetSolarized()
+"}
+
+" Solarized8 {
+" https://github.com/lifepillar/vim-solarized8
+  if filereadable(expand("~/.vim/pack/themes/opt/solarized8/colors/solarized8.vim"))
+    colorscheme solarized8
+    "colorscheme solarized8_high
+  endif
+"}
+
+
+
+
+
+
+
+
+
 
