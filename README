@@ -144,6 +144,13 @@ Docker CE install
 
 
 
+Vagrant Vim Env
+================
+For easily configure vim envrionment in Vagrant or vm instances, 
+Use this file: vagrant_vim_env_config.sh,
+    $ wget https://raw.githubusercontent.com/kyehwanl/config_ready_to_use/master/vagrant_vim_env_config.sh
+    $ chmod u+x ./vagrant_vim_env_config.sh && ./vagrant_vim_env_config.sh
+    
 
 
 
