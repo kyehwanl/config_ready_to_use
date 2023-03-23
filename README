@@ -152,8 +152,21 @@ Use this file: vagrant_vim_env_config.sh,
     $ chmod u+x ./vagrant_vim_env_config.sh && ./vagrant_vim_env_config.sh
     
 
+---- For Example with Vagrantfile ----
+$script = <<-SCRIPT
+apt update
+apt install -y make vifm bash-completion git
+SCRIPT
 
+$script_user = <<-SCRIPT_USER
+git clone https://github.com/kyehwanl/config_ready_to_use.git
+config_ready_to_use/vagrant_vim_env_config.sh
+SCRIPT_USER
 
-
+Vagrant.configure("2") do |config|
+  config.vm.provision "shell", inline: $script, privileged: true
+  config.vm.provision "shell", inline: $script_user, privileged: false
+end
+     
 
 
