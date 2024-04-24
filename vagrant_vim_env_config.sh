@@ -16,9 +16,9 @@ sudo apt install ctags cscope -y
 
 
 # ENV variables
-alias pst="pstree -hup | grep `echo $$`"
+alias pst="pstree -hupl | grep `echo $$`"
 alias qq="exit"
-echo 'alias pst="pstree -hup | grep `echo $$`"' >> ~/.bashrc
+echo 'alias pst="pstree -hupl | grep `echo $$`"' >> ~/.bashrc
 echo 'alias qq="exit"' >> ~/.bashrc
 
 source ~/.bashrc
