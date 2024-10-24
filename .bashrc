@@ -123,6 +123,13 @@ fi
 
 
 
+# ble.sh -- Bash Line Editor
+source /users/kyehwanl/Download/ble.sh/out/ble.sh
+#ble-face auto_complete=fg=238,bg=254
+#ble-face auto_complete=fg=241  #<-- good fg color without background
+
+
+
 
 
 

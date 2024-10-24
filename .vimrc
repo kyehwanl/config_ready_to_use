@@ -1052,7 +1052,7 @@ command! SmallerFont call SmallerFont()
   " Auto change by time
   " https://www.vim.org/scripts/script.php?script_id=5210
     let current_time = strftime("%H:%M")
-      ""echo current_time
+      "echo current_time
     if current_time > "17:00"
       set background=dark
     elseif current_time < "07:00"
@@ -1084,6 +1084,7 @@ command! SmallerFont call SmallerFont()
 " https://github.com/lifepillar/vim-solarized8
   if filereadable(expand("~/.vim/pack/themes/opt/solarized8/colors/solarized8.vim"))
     colorscheme solarized8
+    set background=dark
     "colorscheme solarized8_high
   endif
 "}
