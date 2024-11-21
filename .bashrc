@@ -121,14 +121,39 @@ fi
 #alias k=kubectl
 #source <(kubectl completion bash | sed s/kubectl/k/g)
 
-
-
+##########################################################
+# --------- ble.sh (Bash Line Editor) -------------------
+# https://github.com/akinomyoga/ble.sh.git
+##########################################################
 # ble.sh -- Bash Line Editor
-#source /users/kyehwanl/Download/ble.sh/out/ble.sh
-#ble-face auto_complete=fg=238,bg=254
-#ble-face auto_complete=fg=241  #<-- good fg color without background
+if [ -f /home/kyehwanl/Downloads/ble.sh/out/ble.sh ]; then
+  source /home/kyehwanl/Downloads/ble.sh/out/ble.sh
+
+  # Favoriate fg color without background
+  ble-face auto_complete=fg=241
+  #ble-face auto_complete=fg=238,bg=254 # <-- default
+
+  # Disable EOF marker like "[ble: EOF]"
+  bleopt prompt_eol_mark=''
+  # Disable error exit marker like "[ble: exit %d]"
+  bleopt exec_errexit_mark=
+  # Disable exit marker like "[ble: exit]"
+  bleopt exec_exit_mark=
+  # Disable some other markers like "[ble: ...]"
+  bleopt edit_marker=
+  bleopt edit_marker_error=
+fi
 
 
+###########################################################
+# kubecolor
+# https://github.com/hidetatz/kubecolor?tab=readme-ov-file
+#       wget https://github.com/hidetatz/kubecolor/releases/download/v0.0.25/kubecolor_0.0.25_Linux_x86_64.tar.gz
+#       tar zxvf kubecolor_0.0.25_Linux_x86_64.tar.gz kubecolor
+#       sudo cp kubecolor /usr/bin/ (or sudo install kubecolor /usr/local/bin or  just copy into ~/Download/)
+###########################################################
+# kubecolor
+command -v kubecolor >/dev/null 2>&1 && alias kubectl="kubecolor"
 
 
 
