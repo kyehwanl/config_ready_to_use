@@ -120,11 +120,12 @@ sudo install lazygit /usr/local/bin
 
 
 echo "--- vim go settings ---"
-#git clone https://github.com/fatih/vim-go.git
+git clone https://github.com/fatih/vim-go.git
+#git clone https://github.com/fatih/vim-go.git ~/.vim/pack/plugins/start/vim-go
 rm -rf ~/.vim/bundle/vim-go && mv vim-go ~/.vim/bundle/
 #vim +':GoInstallBinaries' +qall
 #vim +'silent :GoInstallBinaries' +qall
-git clone https://github.com/fatih/vim-go.git ~/.vim/pack/plugins/start/vim-go
+/usr/local/go/bin/go install golang.org/x/tools/gopls@latest
 
 
 . ~/.bashrc
