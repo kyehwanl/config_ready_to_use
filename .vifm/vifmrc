@@ -385,7 +385,8 @@ set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
 "
 " windo filter! /^.*\.(lo|o|d|class|py[co])$|.*~$/
 " filter '(o|.*~)$' 
-filter '(\.([Pl])?o|\.a|\.swp|out|.*~)$'
+"filter '(\.([Pl])?o|\.a|out|\.swp|.*~)$'
+filter /^.*\.(o|swp|a|out)\/?$|.*~$|\.[Pl]?o$/
 
 " ------------------------------------------------------------------------------
 
