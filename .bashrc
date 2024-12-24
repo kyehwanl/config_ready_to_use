@@ -84,7 +84,7 @@ if [ -f ~/.kubectl_bash_completion ]; then
     source ~/.kubectl_bash_completion
   fi
 fi
-#export KUBECONFIG=$HOME/.kube/config2
+#export KUBECONFIG=$HOME/.kube/config
 #source /etc/profile.d/bash_completion.sh
 #source <(kubectl completion bash)
 #alias k=kubectl

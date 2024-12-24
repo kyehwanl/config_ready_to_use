@@ -1,5 +1,5 @@
 #!/bin/sh
-export KUBECONFIG=$HOME/.kube/config2
+export KUBECONFIG=$HOME/.kube/config
 if [ -f /etc/profile.d/bash_completion.sh ]; then
   source /etc/profile.d/bash_completion.sh # in case of errors, "bash: _get_comp_words_by_ref: command not found"
   source <(kubectl completion bash)
