@@ -128,8 +128,18 @@ rm -rf ~/.vim/bundle/vim-go && mv vim-go ~/.vim/bundle/
 /usr/local/go/bin/go install golang.org/x/tools/gopls@latest
 
 
-. ~/.bashrc
-. ~/.bash_aliases
+echo "--- helm install ---"
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+sudo [DESIRED_VERSION="v3.6.3"] ./get_helm.sh
+
+
+echo "--- misc settings ---"
+sudo timedatectl set-timezone America/New_York
+
+
+#. ~/.bashrc
+#. ~/.bash_aliases
 
 echo "--- need to source ble.sh/out/ble.sh"
 echo "--- need to source .bashrc and/or .bash_aliases"
