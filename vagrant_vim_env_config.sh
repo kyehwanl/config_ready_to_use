@@ -21,7 +21,8 @@ command -v sudo >/dev/null 2>&1 || apt install -y sudo
 command -v timedatectl >/dev/null 2>&1 || sudo apt install -y systemd
 command -v vim >/dev/null 2>&1 || apt install -y vim 
 sudo timedatectl set-timezone America/New_York
-sudo apt install ctags exuberant-ctags cscope -y
+sudo apt install ctags -y
+sudo apt install exuberant-ctags cscope -y
 
 
 # ENV variables
