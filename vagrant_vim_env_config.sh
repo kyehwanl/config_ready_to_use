@@ -12,6 +12,7 @@ tar xvfz _.vim_2023_0203.tar.gz
 
 
 # time zone change
+apt update
 command -v sudo >/dev/null 2>&1 || apt install -y sudo 
 command -v timedatectl >/dev/null 2>&1 || sudo apt install -y systemd
 sudo timedatectl set-timezone America/New_York
