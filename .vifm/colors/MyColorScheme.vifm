@@ -25,7 +25,7 @@ highlight JobLine cterm=bold,reverse ctermfg=black ctermbg=white
 highlight SuggestBox cterm=bold ctermfg=default ctermbg=default
 
 if $USER == 'root'
-    "highlight Border ctermbg=red
+    highlight Border ctermbg=red
 endif
 
 highlight {COPYRIGHT,COPYING*,BUGS,ChangeLog*,FAQ,INSTALL*,LICENSE,NEWS,README*,AUTHORS,TODO,THANKS,SERVICES,REPORTING-BUGS} cterm=none ctermfg=187 ctermbg=default
@@ -61,3 +61,5 @@ highlight /.*Makefile$/I cterm=none ctermfg=default ctermbg=default
 highlight /.*\.ac$/I cterm=none ctermfg=204 ctermbg=default
 highlight /.*diff.*/I cterm=none ctermfg=166 ctermbg=default
 highlight /.*Vagrantfile.*/I cterm=none ctermfg=218 ctermbg=default
+highlight /.*Dockerfile.*/I cterm=none ctermfg=yellow ctermbg=default
+highlight /.*Jenkinsfile.*/I cterm=none ctermfg=cyan ctermbg=default
