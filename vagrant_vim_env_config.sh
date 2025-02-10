@@ -1,6 +1,8 @@
 #! /bin/bash -x
 
 #cd $HOME
+apt update
+command -v wget >/dev/null 2>&1 || apt install -y wget
 
 # download vim files
 wget https://github.com/kyehwanl/config_ready_to_use/raw/master/.vimrc
@@ -14,7 +16,6 @@ cp -rf .vimrc .gitconfig .bash_aliases .bashrc $HOME/
 
 
 # time zone change
-apt update
 command -v sudo >/dev/null 2>&1 || apt install -y sudo 
 command -v timedatectl >/dev/null 2>&1 || sudo apt install -y systemd
 command -v vim >/dev/null 2>&1 || apt install -y vim 
