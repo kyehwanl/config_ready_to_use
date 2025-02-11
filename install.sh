@@ -73,12 +73,12 @@ if [ "$lsb_dist" == "centos" ] || [ "$lsb_dist" == "rhel" ]; then
   yum -y install go
 fi
 
-if [ "$lsb_dist" == "ubuntu" ]; then
+if [ "$lsb_dist" == "ubuntu" ] || [ "$lsb_dist" == "debian" ]; then
   sudo apt update
   command -v sudo >/dev/null 2>&1 || (apt update && apt install -y sudo) # in case docker container doesn't have sudo
   sudo apt install -y ctags
   sudo apt install -y exuberant-ctags
-  sudo apt install -y make gawk
+  sudo apt install -y make gawk  # for debian, gawk added
   sudo apt install -y gcc automake autoconf libtool
   sudo apt install -y tmux vim vifm cscope net-tools psmisc patch wget
 fi
