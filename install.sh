@@ -78,7 +78,7 @@ if [ "$lsb_dist" == "ubuntu" ] || [ "$lsb_dist" == "debian" ]; then
   command -v sudo >/dev/null 2>&1 || (apt update && apt install -y sudo) # in case docker container doesn't have sudo
   sudo apt install -y ctags
   sudo apt install -y exuberant-ctags
-  sudo apt install -y make gawk  # for debian, gawk added
+  sudo apt install -y make vifm bash-completion git curl net-tools gawk  # for debian, gawk added
   sudo apt install -y gcc automake autoconf libtool
   sudo apt install -y tmux vim vifm cscope net-tools psmisc patch wget
 fi
