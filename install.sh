@@ -74,7 +74,8 @@ if [ "$lsb_dist" == "centos" ] || [ "$lsb_dist" == "rhel" ]; then
 fi
 
 if [ "$lsb_dist" == "ubuntu" ]; then
-  command -v sudo >/dev/null 2>&1 || apt install -y sudo && sudo apt update
+  sudo apt update
+  command -v sudo >/dev/null 2>&1 || (apt update && apt install -y sudo) # in case docker container doesn't have sudo
   sudo apt install -y ctags
   sudo apt install -y exuberant-ctags
   sudo apt install -y make 
