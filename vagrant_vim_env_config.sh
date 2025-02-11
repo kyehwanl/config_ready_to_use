@@ -1,7 +1,8 @@
 #! /bin/bash -x
 
 #cd $HOME
-apt update
+sudo apt update
+command -v sudo >/dev/null 2>&1 || (apt update && apt install -y sudo) # in case docker container doesn't have sudo
 command -v wget >/dev/null 2>&1 || apt install -y wget
 command -v vim --version >/dev/null 2>&1 || apt install -y vim
 
@@ -17,7 +18,6 @@ cp -rf .vimrc .gitconfig .bash_aliases .bashrc $HOME/
 
 
 # time zone change
-command -v sudo >/dev/null 2>&1 || apt install -y sudo 
 command -v timedatectl >/dev/null 2>&1 || sudo apt install -y systemd
 command -v vim >/dev/null 2>&1 || apt install -y vim 
 sudo timedatectl set-timezone America/New_York
