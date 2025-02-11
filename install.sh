@@ -146,3 +146,4 @@ echo "--- need to source ble.sh/out/ble.sh"
 echo "--- need to source .bashrc and/or .bash_aliases"
 echo "--- need to replace .kube/config with /etc/kubernetes/admin.conf if kubectl not working"
 
+source ~/.bashrc
