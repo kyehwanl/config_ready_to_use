@@ -76,7 +76,7 @@ fi
 if [ "$lsb_dist" == "ubuntu" ] || [ "$lsb_dist" == "debian" ]; then
   sudo apt update
   command -v sudo >/dev/null 2>&1 || (apt update && apt install -y sudo) # in case docker container doesn't have sudo
-  #if [ "$dist_version" == "noble" ]; then   # ubuntu 24.04, timezone setting without prompt
+  #if [ "$dist_version" == "noble" ]; then   # timezone setting for docker instance 
   ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
   DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
   dpkg-reconfigure --frontend noninteractive tzdata
@@ -140,8 +140,8 @@ chmod 700 get_helm.sh
 sudo [DESIRED_VERSION="v3.6.3"] ./get_helm.sh
 
 
-#echo "--- misc settings ---"
-#sudo timedatectl set-timezone America/New_York
+echo "--- misc settings ---"   # for vagrant instance
+sudo timedatectl set-timezone America/New_York
 
 
 #. ~/.bashrc
