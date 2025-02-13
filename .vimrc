@@ -136,8 +136,11 @@ nnoremap O :set noimd<CR>O
 " vnoremap <c-]> g<c-]>
 
 " --- tag and pop do more easily
-nnoremap <leader>h <C-T>
-nnoremap <leader>l <C-]>
+"nnoremap <leader>h <C-T>
+"nnoremap <leader>l <C-]>
+" --- changed to recursive mapping (instead of nnoremap) for vim-go
+nmap <leader>h <C-T>
+nmap <leader>l <C-]>
 
 " --- Open the definition in a vertical split (ex. ctrl-W ctrl-]:  horizontal split)
 map <leader>] :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
