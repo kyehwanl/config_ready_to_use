@@ -104,10 +104,8 @@ set tags=./tags,../tags,../../tags,/usr/tags
 "set tags+=/root/linux/tags
 "set tags+=/root/linux/include/linux/tags " kernel
 set tags+=/usr/include/tags     " include 
-"set tags+=/usr/src/redhat/SOURCES/iproute-2.6.20-070313_LKH/tags
-"set tags+=/usr/local/src/openldap-2.4.11/tags
 set tags+=./tags;/,~/.vimtags
-set tags+=/opt/project/gobgp_test/gowork/src/github.com/osrg/gobgp/gotags
+set tags+=./gotags,../gotags,../../gotags
 
 set shiftwidth=4
 set tabstop=8
