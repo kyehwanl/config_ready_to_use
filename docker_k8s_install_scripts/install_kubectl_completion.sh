@@ -8,6 +8,11 @@ YUM_PACKAGE_NAME=$PACKAGE
 DEB_PACKAGE_NAME=$PACKAGE
 
 
+if ! command -v kubectl >/dev/null 2>&1; then
+    echo "### install kubectl first ###"
+fi
+
+
 if [ -f /etc/profile.d/bash_completion.sh ]; then # in case not exist, apt or yum install bash-completion
   source /etc/profile.d/bash_completion.sh # this line is for the case of errors, "bash: _get_comp_words_by_ref: command not found"
   source <(kubectl completion bash)
