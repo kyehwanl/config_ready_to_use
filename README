@@ -40,6 +40,20 @@ Steps
     
 
 
+All-in-one Installation
+=======================
+
+source ./install-config-ready.sh
+
+  - tmux, vifm, net-tools
+  - ble.sh
+  - kubecolor
+  - Go v1.23.3 with gotags, vimgo, delve go debugger
+  - lazygit
+  - helm
+
+
+
 
 Troubleshoot
 =============
