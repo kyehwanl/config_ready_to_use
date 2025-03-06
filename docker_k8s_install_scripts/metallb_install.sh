@@ -6,7 +6,8 @@ helm upgrade --install metallb  metallb/metallb --create-namespace --namespace m
 
 sleep 1
 
-cat <<EOF > IPAddressPool.yaml
+kubectl apply -f - <<EOF
+---
 apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
 metadata:
@@ -14,12 +15,8 @@ metadata:
   namespace: metallb-system
 spec:
   addresses:
-  - 192.168.1.10-192.168.1.20
-EOF
-kubectl apply -f IPAddressPool.yaml
-
-
-cat <<EOF > L2Advertisement.yaml
+  - 192.168.100.100-192.168.100.130
+---
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
 metadata:
@@ -30,5 +27,45 @@ spec:
   - default-pool
 EOF
 
-kubectl apply -f L2Advertisement.yaml
+
+
+#cat <<EOF > IPAddressPool.yaml
+#apiVersion: metallb.io/v1beta1
+#kind: IPAddressPool
+#metadata:
+#  name: default-pool
+#  namespace: metallb-system
+#spec:
+#  addresses:
+#  - 192.168.100.100-192.168.100.130
+#EOF
+#kubectl apply -f IPAddressPool.yaml
+
+#cat <<EOF > L2Advertisement.yaml
+#apiVersion: metallb.io/v1beta1
+#kind: L2Advertisement
+#metadata:
+#  name: default
+#  namespace: metallb-system
+#spec:
+#  ipAddressPools:
+#  - default-pool
+#EOF
+#kubectl apply -f L2Advertisement.yaml
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
