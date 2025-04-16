@@ -103,6 +103,7 @@ fi
 ##########################################################
 # ble.sh -- Bash Line Editor
 if [ -f ~/.local/share/blesh/ble.sh ]; then
+  set --    # this meas parameter initialization in order not to reference $@ 
   source ~/.local/share/blesh/ble.sh
 
   # Favoriate fg color without background
