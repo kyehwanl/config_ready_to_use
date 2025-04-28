@@ -11,13 +11,13 @@ CALICO_VERSION="3.28.2"
 POD_NETWORK_CIDR="192.168.0.0/16"
 ROOT_PASSWORD="kubeadmin"
 ADV_IP=$(ifconfig | grep 192.168. | awk '{print $2}')
-CLUSTER_NAME=clu1
+CLUSTER_NAME=cluster1
 
 
 if [[ "${ADV_IP}" == *.*1 ]]; then
-  CLUSTER_NAME=clu1
+  CLUSTER_NAME=cluster1
 elif [[ "${ADV_IP}" == *.*2 ]]; then 
-  CLUSTER_NAME=clu2
+  CLUSTER_NAME=cluster2
 fi
 
 cat <<EOF >/root/config.yaml
@@ -37,6 +37,7 @@ networking:
   podSubnet: ${POD_NETWORK_CIDR}
   serviceSubnet: 10.96.0.0/12
 EOF
+
 
 
 # -------------------------------------------------------------------
@@ -125,8 +126,9 @@ master_tasks() {
 
     log "TASK 8: Initializing Kubernetes Cluster"
 
-	#kubeadm init --config /root/init-config.yaml
-    kubeadm init --pod-network-cidr="${POD_NETWORK_CIDR}" --apiserver-advertise-address=${ADV_IP} >> /root/kubeinit.log 2>&1
+
+	kubeadm init --config /root/init-config.yaml
+    #kubeadm init --pod-network-cidr="${POD_NETWORK_CIDR}" --apiserver-advertise-address=${ADV_IP} >> /root/kubeinit.log 2>&1
 
     log "TASK 9: Copying kube admin config"
     mkdir -p /root/.kube
@@ -157,7 +159,7 @@ main() {
     main_tasks
 
     #if [[ $(hostname) =~ .*master.* ]]; then
-    if [[ $(hostname) =~ .*clu.* ]]; then
+    if [[ $(hostname) =~ .*ub.* ]]; then
         master_tasks
     elif [[ $(hostname) =~ .*worker.* ]]; then
         worker_tasks
