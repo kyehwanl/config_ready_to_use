@@ -109,9 +109,17 @@ tar zxvf kubecolor_0.0.25_Linux_x86_64.tar.gz kubecolor
 sudo cp -rf kubecolor /usr/bin/
 
 
-echo "--- Go install v1.23.3 ---"
-wget https://go.dev/dl/go1.23.3.linux-amd64.tar.gz
-sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.23.3.linux-amd64.tar.gz
+echo "--- Go install latest version or v1.24.6 ---"
+GO_URL="https://go.dev/dl/"
+LATEST_VERSION=$(curl -sL "$GO_URL" | grep -oP 'go[0-9]+\.[0-9]+(\.[0-9]+)?\.linux-amd64\.tar\.gz' | head -n 1)
+if [ -z "$LATEST_VERSION" ]; then
+  echo "❌  Cannot find the latest Go version."
+  LATEST_VERSION="go1.24.6.linux-amd64.tar.gz"
+fi
+wget "https://go.dev/dl/$LATEST_VERSION"
+sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf "$LATEST_VERSION"
+echo "PATH=$PATH:/usr/local/go/bin" >> ${HOME}/.bashrc
+export PATH=$PATH:/usr/local/go/bin
 
 
 echo "--- gotags install ---"
