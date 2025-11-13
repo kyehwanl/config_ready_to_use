@@ -1,0 +1,62 @@
+# docker-compose.yml (Compose v2)
+services:
+  dev-ubuntu:
+    image: dev-ubuntu-rtu       # Image name: Ready To Use
+    build:
+      context: .
+      dockerfile: Dockerfile-ready-to-use
+      args:
+        USER_ID: "${USER_ID:-1000}"
+        GROUP_ID: "${GROUP_ID:-1000}"
+        USER_NAME: "${USER_NAME:-dev}"
+    command: bash
+    tty: true
+    stdin_open: true
+    working_dir: /workspace
+    user: "${USER_ID:-1000}:${GROUP_ID:-1000}"
+    environment:
+      USER: "${USER_NAME:-dev}"
+      LANG: C.UTF-8
+      LC_ALL: C.UTF-8
+      GOPATH: "/home/${USER_NAME:-dev}/go"
+    volumes:
+      - ./:/workspace                                # 바인드volume: 로컬 소스
+      - gocache:/home/${USER_NAME:-dev}/go/pkg/mod   # named voluem: Go 모듈 캐시
+
+  dev-golang:
+    image: golang:1.23
+    command: bash
+    tty: true
+    stdin_open: true
+    working_dir: /workspace
+    user: "${USER_ID:-1000}:${GROUP_ID:-1000}"
+    environment:
+      GOPATH: /go
+    volumes:
+      - ./:/workspace
+      - gocache:/go/pkg/mod
+
+volumes:
+  gocache:
+
+# Usage:
+# 1.
+#   export UID=$(id -u) GID=$(id -g)
+#   docker compose -f <file> run --rm dev-ubuntu    # Ubuntu 셸
+#   docker compose -f <file >run --rm dev-golang    # Go 셸
+#
+# 2.
+#   docker compose  -f <file> run --rm -u $(id -u):$(id -g)  dev-ubuntu
+#   docker compose  -f <file> run --rm -u $UID:$GID dev-ubuntu
+#
+# 3. Build Image again
+#   docker compose [-f <file>] build [--no-cache] dev-ubuntu
+#
+# 4. Current Using Command (actual commands to be used)
+#   docker compose -f docker-compose-test.yaml build --no-cache dev-ubuntu
+#   docker compose -f docker-compose-ready-to-use.yaml build
+#   docker compose -f docker-compose-ready-to-use.yaml run --rm  -u $UID:$GID dev-ubuntu
+#
+
+
+

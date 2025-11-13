@@ -1,0 +1,42 @@
+FROM ubuntu:24.04
+
+# --- from .env or host export argument ---
+ARG USER_ID=1000
+ARG GROUP_ID=1000
+ARG USER_NAME=dev
+
+# --- Basic Package Install ---
+RUN apt-get update && apt-get install -y \
+    sudo build-essential git curl vim wget \
+ && rm -rf /var/lib/apt/lists/*
+
+# --- 그룹/유저 생성 ---
+#   - 해당 GID/UID가 없으면 새로 만들고
+#   - 이미 있으면 useradd/groupadd가 실패하니, 그런 경우엔 기존 계정 이름만 USER_NAME으로 바꾸는 식으로 처리
+RUN set -eux; \
+    if getent group "${GROUP_ID}" >/dev/null; then \
+        # 같은 GID가 이미 있으면 이름만 USER_NAME으로 바꿈
+        groupmod -n "${USER_NAME}" "$(getent group "${GROUP_ID}" | cut -d: -f1)"; \
+    else \
+        groupadd -g "${GROUP_ID}" "${USER_NAME}"; \
+    fi; \
+    if getent passwd "${USER_ID}" >/dev/null; then \
+        # 같은 UID가 이미 있으면 이름만 USER_NAME으로 바꿈
+        usermod -l "${USER_NAME}" -d "/home/${USER_NAME}" -m \
+            "$(getent passwd "${USER_ID}" | cut -d: -f1)"; \
+        usermod -g "${GROUP_ID}" "${USER_NAME}"; \
+    else \
+        useradd -m -u "${USER_ID}" -g "${GROUP_ID}" "${USER_NAME}"; \
+    fi
+
+# --- sudo 권한 부여 ---
+RUN echo "${USER_NAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+# --- 기본 유저/작업 디렉터리 ---
+USER ${USER_NAME}
+WORKDIR /workspace
+
+# --- READY-TO-USE Package Install ---
+RUN wget https://raw.githubusercontent.com/kyehwanl/config_ready_to_use/refs/heads/master/install-config-ready.sh
+RUN chmod +x ./install-config-ready.sh && ./install-config-ready.sh
+RUN echo "export SHELL=/bin/bash" >> ~/.bashrc

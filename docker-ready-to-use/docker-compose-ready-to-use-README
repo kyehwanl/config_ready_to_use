@@ -1,0 +1,516 @@
+
+Docker Ready To Use
+=====================
+
+-----------------------
+1. Making  Dockerfile 
+------------------------
+
+<Dockerfile-ready-to-use>/*{{{*/
+
+FROM ubuntu:24.04
+
+# --- from .env or host export argument ---
+ARG USER_ID=1000
+ARG GROUP_ID=1000
+ARG USER_NAME=dev
+
+# --- Basic Package Install ---
+RUN apt-get update && apt-get install -y \
+    sudo build-essential git curl vim wget \
+ && rm -rf /var/lib/apt/lists/*
+
+# --- 그룹/유저 생성 ---
+#   - 해당 GID/UID가 없으면 새로 만들고
+#   - 이미 있으면 useradd/groupadd가 실패하니, 그런 경우엔 기존 계정 이름만 USER_NAME으로 바꾸는 식으로 처리
+RUN set -eux; \
+    if getent group "${GROUP_ID}" >/dev/null; then \
+        # 같은 GID가 이미 있으면 이름만 USER_NAME으로 바꿈
+        groupmod -n "${USER_NAME}" "$(getent group "${GROUP_ID}" | cut -d: -f1)"; \
+    else \
+        groupadd -g "${GROUP_ID}" "${USER_NAME}"; \
+    fi; \
+    if getent passwd "${USER_ID}" >/dev/null; then \
+        # 같은 UID가 이미 있으면 이름만 USER_NAME으로 바꿈
+        usermod -l "${USER_NAME}" -d "/home/${USER_NAME}" -m \
+            "$(getent passwd "${USER_ID}" | cut -d: -f1)"; \
+        usermod -g "${GROUP_ID}" "${USER_NAME}"; \
+    else \
+        useradd -m -u "${USER_ID}" -g "${GROUP_ID}" "${USER_NAME}"; \
+    fi
+
+# --- sudo 권한 부여 ---
+RUN echo "${USER_NAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+# --- 기본 유저/작업 디렉터리 ---
+USER ${USER_NAME}
+WORKDIR /workspace
+
+# --- READY-TO-USE Package Install ---
+RUN wget https://raw.githubusercontent.com/kyehwanl/config_ready_to_use/refs/heads/master/install-config-ready.sh
+RUN chmod +x ./install-config-ready.sh && ./install-config-ready.sh
+RUN echo "export SHELL=/bin/bash" >> ~/.bashrc/*}}}*/
+
+
+(A) Test 테스트: 실제 호스트 사용자 UID/GID로 생성
+
+  export USER_ID=$(id -u)
+  export GROUP_ID=$(id -g)
+  export USER_NAME=kyehwanl
+
+  docker build \
+    -t dtest2 \
+    -f Dockerfile-test \
+    --build-arg USER_ID=$USER_ID \
+    --build-arg GROUP_ID=$GROUP_ID \
+    --build-arg USER_NAME=$USER_NAME \
+    .
+
+
+  컨테이너 실행:
+  docker run --rm -it dtest2 id
+
+
+  출력:
+  uid=40021(kyehwanl) gid=40021(kyehwanl)
+
+
+  (너의 서버 UID/GID에 따라 다름)
+
+  또 테스트:
+  docker run --rm -it dtest2 bash -lc "sudo whoami"
+
+  → 출력: root
+
+
+
+(B) 테스트 3: UID/GID 충돌 케이스
+
+  Ubuntu 이미지는 UID 1000 “ubuntu” 를 이미 가지고 있으므로
+  다음 명령으로 테스트:
+
+  docker build \
+    -t dtest3 \
+    -f Dockerfile-test \
+    --build-arg USER_ID=1000 \
+    --build-arg GROUP_ID=1000 \
+    --build-arg USER_NAME=myuser \
+    .
+
+
+  컨테이너 실행:
+  docker run --rm -it dtest3 id
+
+
+  → 기대 출력:
+  uid=1000(myuser) gid=1000(myuser)
+
+  즉 기존 ubuntu 유저가 myuser 로 rename됨.
+
+
+
+(C) 테스트 4: 완전 새로운 UID 테스트
+
+  docker build \
+    -t dtest4 \
+    -f Dockerfile-test \
+    --build-arg USER_ID=40021 \
+    --build-arg GROUP_ID=40021 \
+    --build-arg USER_NAME=testuser \
+    .
+
+
+  컨테이너:
+  docker run --rm -it dtest4 id
+
+
+  → 
+  uid=40021(testuser) gid=40021(testuser)
+
+
+
+
+
+(D) One-liner로 만들기 (without using compose)
+
+export USER_ID=$(id -u)
+export GROUP_ID=$(id -g)
+export USER_NAME=kyehwanl
+
+docker volume create gocache
+
+docker build \
+  -t dev-ubuntu-R2U \
+  -f Dockerfile-ready-to-use \
+  --build-arg USER_ID=$USER_ID \
+  --build-arg GROUP_ID=$GROUP_ID \
+  --build-arg USER_NAME=$USER_NAME \
+  .
+
+docker run --rm -it \
+  --user $USER_ID:$GROUP_ID \
+  -e USER=$USER_NAME \
+  -e LANG=C.UTF-8 \
+  -e LC_ALL=C.UTF-8 \
+  -e GOPATH=/home/$USER_NAME/go \
+  -v "$(pwd)":/workspace \
+  -v gocache:/home/$USER_NAME/go/pkg/mod \
+  -w /workspace \
+  dev-ubuntu-R2U \
+  bash
+
+
+< 설명>
+--user $USER_ID:$GROUP_ID
+→ 호스트와 권한 1:1 매칭
+
+-e USER=$USER_NAME
+→ 프롬프트 정상, "I have no name!" 방지
+
+-e LANG / -e LC_ALL
+→ locale 경고 방지
+
+-e GOPATH
+→ Go build 환경 유지
+
+-v "$(pwd)":/workspace
+→ 현재 로컬 디렉터리를 컨테이너 /workspace 에 bind mount
+
+-v gocache:/home/$USER_NAME/go/pkg/mod
+→ Go module cache volume
+
+-w /workspace
+→ 기본 working directory
+
+bash
+→ 바로 bash 셸 실행
+
+
+< 최종 One-liner (완전체) >
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+volume 만들기 + build + run 을 모두 한 번에 하기:
+
+export USER_ID=$(id -u); \
+export GROUP_ID=$(id -g); \
+export USER_NAME=kyehwanl; \
+docker volume create gocache; \
+docker build -t dev-ubuntu-R2U -f Dockerfile-ready-to-use \
+  --build-arg USER_ID=$USER_ID \
+  --build-arg GROUP_ID=$GROUP_ID \
+  --build-arg USER_NAME=$USER_NAME .; \
+docker run --rm -it \
+  --user $USER_ID:$GROUP_ID \
+  -e USER=$USER_NAME \
+  -e LANG=C.UTF-8 \
+  -e LC_ALL=C.UTF-8 \
+  -e GOPATH=/home/$USER_NAME/go \
+  -v "$(pwd)":/workspace \
+  -v gocache:/home/$USER_NAME/go/pkg/mod \
+  -w /workspace \
+  dev-ubuntu-R2U \
+  bash
+
+
+👉 이것만 터미널에 붙여넣으면
+compose 없이 dev-ubuntu 서비스가 바로 실행됨.
+
+
+
+
+
+
+
+-----------------------------------
+2.  Combning with docker compose
+-----------------------------------
+
+# docker-compose-ready-to-use.yml /*{{{*/
+
+# docker-compose.yml (Compose v2)
+services:
+  dev-ubuntu:
+    image: dev-ubuntu-rtu        # Image name: Ready To Use 
+    build:
+      context: .
+      dockerfile: Dockerfile-ready-to-use
+      args:
+        USER_ID: "${USER_ID:-1000}"
+        GROUP_ID: "${GROUP_ID:-1000}"
+        USER_NAME: "${USER_NAME:-dev}"
+    command: bash
+    tty: true
+    stdin_open: true
+    working_dir: /workspace
+    user: "${USER_ID:-1000}:${GROUP_ID:-1000}"
+    environment:
+      USER: "${USER_NAME:-dev}"
+      LANG: C.UTF-8
+      LC_ALL: C.UTF-8
+      GOPATH: "/home/${USER_NAME:-dev}/go"
+    volumes:
+      - ./:/workspace                                # 바인드volume: 로컬 소스
+      - gocache:/home/${USER_NAME:-dev}/go/pkg/mod   # named voluem: Go 모듈 캐시
+
+  dev-golang:
+    image: golang:1.23
+    command: bash
+    tty: true
+    stdin_open: true
+    working_dir: /workspace
+    user: "${USER_ID:-1000}:${GROUP_ID:-1000}"
+    environment:
+      GOPATH: /go
+    volumes:
+      - ./:/workspace
+      - gocache:/go/pkg/mod
+
+volumes:
+  gocache:
+
+/*}}}*/
+
+
+1. 사용법
+
+0) Pre-Requite : 환경변수 세팅 (서버마다 자동으로 맞추기)
+rm -f .env
+
+cat <<EOF > .env
+USER_ID=$(id -u)
+GROUP_ID=$(id -g)
+USER_NAME=kyehwanl
+EOF
+
+
+1) 프로젝트 루트에 workplace/ 디렉터리를 만들고 소스를 넣어둔다.(Optional)
+ --> default로 현재 폴더(./)에 volume mount됨
+
+
+2) 리눅스/WSL에서 환경 변수로 UID/GID 전달: --> 안되어서 .env를 쓴다
+
+  export UID=$(id -u) GID=$(id -g)
+  docker compose run --rm dev-ubuntu    # Ubuntu 셸
+  docker compose run --rm dev-golang    # Go 셸
+
+  macOS/Windows도 Compose가 UID,GID를 읽긴 하지만, 퍼미션 이슈가 생기면 컨테이너 내에서 chown -R로 1회 정리해주면 됨.
+
+  --> NEED to make ".env", OTHERWISE, docker-compose yaml hardly get env variables
+
+
+2. 확인 포인트
+
+  - 퍼미션: 컨테이너 안에서 생성한 /work(또는 /workspace) 파일이 호스트에서도 내 사용자 소유로 보인다.
+  - 캐시 재사용: dev-golang에서 한 번 go build로 받은 모듈이 다음 실행에서도 다시 다운로드되지 않음(속도 ↑).
+  - 컨테이너 청소: --rm로 종료해도 gocache 볼륨과 로컬 mywork/는 그대로
+
+
+
+
+
+3. 빌드 & 실행 테스트
+1) 빌드
+  docker compose -f docker-compose-ready-to-use.yaml build dev-ubuntu
+
+  정상이라면 마지막에 Successfully built ... / Successfully tagged dev-ubuntu-test 가 보인다.
+
+
+2) 컨테이너에서 id 확인
+  docker compose -f docker-compose-ready-to-use.yaml run --rm dev-ubuntu id
+
+  기대 출력 (예시):
+
+  uid=40021(kyehwanl) gid=40021(kyehwanl) groups=40021(kyehwanl)
+
+  → 호스트 UID/GID 와 같은지 확인.
+
+
+3) sudo 권한 확인
+  docker compose -f docker-compose-ready-to-use.yaml run --rm dev-ubuntu bash -lc 'whoami; sudo whoami'
+
+
+  기대:
+
+  kyehwanl
+  root
+
+
+
+
+
+4. 빠른 테스트- for golang
+  # Go 예제
+  docker compose run --rm dev-golang bash -lc \
+	'cd /workspace && printf "package main\nfunc main(){println(\"hi\")}\n" > main.go && go build && ./main'
+
+  # 퍼미션 확인 (호스트에서)
+  ls -l mywork
+
+
+필요하면 dev-golang에 자주 쓰는 툴(예: make, git)을 설치하도록 entrypoint를 추가해줄 수도 있어.
+
+
+
+
+
+
+
+
+
+5. Compose 프로젝트 전체를 깨끗하게 지우는 방법 (추천)
+
+* 네트워크 + 볼륨 + 중단된 컨테이너까지 전부 한 번에 지우고 싶으면:
+
+  docker compose -f docker-compose-ready-to-use.yaml down --volumes --rmi all
+
+
+* 옵션 의미:
+
+  down → 컨테이너 + default network 삭제
+
+  --volumes → compose 에 의해 생성된 named volume 삭제
+
+  --rmi all → 빌드된 이미지 삭제 (옵션)
+
+  이 명령은 테스트 환경 초기화할 때 가장 깔끔하다.
+
+
+
+* cleanup 스크립트” 도 만들어줄 수 있다
+  예: clean.sh
+
+  #!/bin/bash
+  docker compose -f docker-compose-ready-to-use.yaml down --volumes --rmi all
+  docker network prune -f
+  docker volume prune -f
+  docker image prune -f
+
+
+
+
+
+
+
+
+
+
+6. TroubleShoot & ETC
+
+(1) stat .: permission denied
+
+  $ docker compose -f docker-compose-ready-to-use.yaml build dev-ubuntu
+  stat .: permission denied
+
+  $ pwd
+  /users/kyehwanl/workspace/docker-ready-to-use-test
+
+--> due to ownership
+    change the location or directory's ownership with chown
+
+
+
+
+
+
+
+-----------------------
+1️⃣ entrypoint 줄의 의미
+-----------------------
+entrypoint: ["/bin/bash","-lc","apt-get update && apt-get install -y build-essential vim && exec bash"]
+
+
+이건 컨테이너가 시작될 때 자동으로 실행할 명령을 덮어쓰기 한 겁니다.
+하나씩 해석하면 👇
+
+
+부분		의미
+/bin/bash	bash 셸로 명령을 실행하겠다.
+-l			“login shell” 옵션 — .bash_profile, .profile 등을 읽어서 환경 변수를 세팅함.
+-c			뒤따르는 문자열을 명령(command) 으로 실행하라는 의미.
+apt-get update && apt-get install -y build-essential vim	컨테이너가 뜰 때 패키지 업데이트 및 필수 툴 설치.
+exec bash	설치 끝나면 bash 셸을 현재 프로세스로 교체(exec) 해서 종료되지 않고 인터랙티브 셸 유지.
+
+
+
+
+---------------------------------
+2️⃣ exec bash 와 그냥 bash 의 차이
+---------------------------------
+명령		동작
+bash		새 프로세스를 fork 해서 실행. 원래 프로세스(여기서는 bash -lc)는 백그라운드에 남아있음.
+exec bash	현재 프로세스가 bash로 교체됨 (PID 동일). 원래 프로세스는 완전히 사라짐.
+
+👉 즉, exec bash 를 쓰면 컨테이너 PID 1 프로세스가 새 bash로 바뀌므로
+“명령 다 끝났는데 컨테이너가 바로 종료되는” 문제를 방지하고, 정상적으로 셸이 계속 열려 있게 됩니다.
+
+
+예시로 보면:
+
+  bash -c "echo hi; bash"        # 자식 bash가 뜨고, 원래 프로세스는 남아있음
+  bash -c "echo hi; exec bash"   # 원래 프로세스가 bash로 대체됨 (깨끗함)
+
+
+
+
+
+
+------------------------------
+3️⃣ entrypoint와 command의 관계
+------------------------------
+
+Docker는 ENTRYPOINT + CMD 두 가지 개념이 있습니다.
+Compose에서도 그대로 적용돼요.
+
+항목				역할
+ENTRYPOINT			컨테이너가 시작될 때 항상 실행되는 “기본 실행 파일”
+CMD	ENTRYPOINT에 	전달되는 기본 인자 또는, entrypoint가 없을 경우 전체 커맨드 역할
+
+즉,
+  entrypoint: ["/bin/bash","-lc"]
+  command: ["apt-get update && exec bash"]
+
+
+이면 최종적으로는 /bin/bash -lc "apt-get update && exec bash" 가 실행됩니다.
+
+
+✅ Overriding 규칙 요약
+케이스										어떤 게 우선?
+docker run <image> (entrypoint만 정의됨)	entrypoint 실행됨
+docker run --entrypoint						entrypoint 덮어씀
+docker run <image> <CMD>					CMD가 entrypoint에 인자로 전달됨
+Compose의 command:							CMD와 같은 역할 (덮어씀)
+Compose의 entrypoint:						ENTRYPOINT를 완전히 덮어씀
+
+
+예를 들어:
+
+  docker run -it --entrypoint /bin/sh ubuntu
+
+  → 원래 ENTRYPOINT 가 있더라도 무시하고 /bin/sh 만 실행함.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
