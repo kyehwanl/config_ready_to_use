@@ -53,9 +53,8 @@ volumes:
 #   docker compose [-f <file>] build [--no-cache] dev-ubuntu
 #
 # 4. Current Using Command (actual commands to be used)
-#   docker compose -f docker-compose-test.yaml build --no-cache dev-ubuntu
-#   docker compose -f docker-compose-ready-to-use.yaml build
-#   docker compose -f docker-compose-ready-to-use.yaml run --rm  -u $UID:$GID dev-ubuntu
+#   docker compose -f docker-compose-ready-to-use.yaml build [--no-cache] dev-ubuntu
+#   docker compose -f docker-compose-ready-to-use.yaml run --rm dev-ubuntu
 #
 
 

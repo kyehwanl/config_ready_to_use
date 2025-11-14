@@ -56,7 +56,7 @@ RUN echo "export SHELL=/bin/bash" >> ~/.bashrc/*}}}*/
 
   export USER_ID=$(id -u)
   export GROUP_ID=$(id -g)
-  export USER_NAME=kyehwanl
+  export USER_NAME=$USER
 
   docker build \
     -t dtest2 \
@@ -135,12 +135,12 @@ RUN echo "export SHELL=/bin/bash" >> ~/.bashrc/*}}}*/
 
 export USER_ID=$(id -u)
 export GROUP_ID=$(id -g)
-export USER_NAME=kyehwanl
+export USER_NAME=$USER
 
 docker volume create gocache
 
 docker build \
-  -t dev-ubuntu-R2U \
+  -t dev-ubuntu-rtu \
   -f Dockerfile-ready-to-use \
   --build-arg USER_ID=$USER_ID \
   --build-arg GROUP_ID=$GROUP_ID \
@@ -156,7 +156,7 @@ docker run --rm -it \
   -v "$(pwd)":/workspace \
   -v gocache:/home/$USER_NAME/go/pkg/mod \
   -w /workspace \
-  dev-ubuntu-R2U \
+  dev-ubuntu-rtu \
   bash
 
 
@@ -193,9 +193,9 @@ volume 만들기 + build + run 을 모두 한 번에 하기:
 
 export USER_ID=$(id -u); \
 export GROUP_ID=$(id -g); \
-export USER_NAME=kyehwanl; \
+export USER_NAME=$USER; \
 docker volume create gocache; \
-docker build -t dev-ubuntu-R2U -f Dockerfile-ready-to-use \
+docker build -t dev-ubuntu-rtu -f Dockerfile-ready-to-use \
   --build-arg USER_ID=$USER_ID \
   --build-arg GROUP_ID=$GROUP_ID \
   --build-arg USER_NAME=$USER_NAME .; \
@@ -208,7 +208,7 @@ docker run --rm -it \
   -v "$(pwd)":/workspace \
   -v gocache:/home/$USER_NAME/go/pkg/mod \
   -w /workspace \
-  dev-ubuntu-R2U \
+  dev-ubuntu-rtu \
   bash
 
 
@@ -274,12 +274,13 @@ volumes:
 1. 사용법
 
 0) Pre-Requite : 환경변수 세팅 (서버마다 자동으로 맞추기)
+
 rm -f .env
 
 cat <<EOF > .env
 USER_ID=$(id -u)
 GROUP_ID=$(id -g)
-USER_NAME=kyehwanl
+USER_NAME=$USER
 EOF
 
 
@@ -315,22 +316,23 @@ EOF
   정상이라면 마지막에 Successfully built ... / Successfully tagged dev-ubuntu-test 가 보인다.
 
 
-2) 컨테이너에서 id 확인
+2) 실행
+  docker compose -f docker-compose-ready-to-use.yaml run --rm dev-ubuntu 
+
+
+3)  컨테이너에서 id 확인
   docker compose -f docker-compose-ready-to-use.yaml run --rm dev-ubuntu id
 
   기대 출력 (예시):
-
   uid=40021(kyehwanl) gid=40021(kyehwanl) groups=40021(kyehwanl)
 
   → 호스트 UID/GID 와 같은지 확인.
 
 
-3) sudo 권한 확인
+4) sudo 권한 확인
   docker compose -f docker-compose-ready-to-use.yaml run --rm dev-ubuntu bash -lc 'whoami; sudo whoami'
 
-
   기대:
-
   kyehwanl
   root
 

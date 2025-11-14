@@ -40,3 +40,25 @@ WORKDIR /workspace
 RUN wget https://raw.githubusercontent.com/kyehwanl/config_ready_to_use/refs/heads/master/install-config-ready.sh
 RUN chmod +x ./install-config-ready.sh && ./install-config-ready.sh
 RUN echo "export SHELL=/bin/bash" >> ~/.bashrc
+
+
+# --- One-liner ---
+#export USER_ID=$(id -u); \
+#export GROUP_ID=$(id -g); \
+#export USER_NAME=$USER; \
+#docker volume create gocache; \
+#docker build -t dev-ubuntu-rtu -f Dockerfile-ready-to-use \
+#  --build-arg USER_ID=$USER_ID \
+#  --build-arg GROUP_ID=$GROUP_ID \
+#  --build-arg USER_NAME=$USER_NAME .; \
+#docker run --rm -it \
+#  --user $USER_ID:$GROUP_ID \
+#  -e USER=$USER_NAME \
+#  -e LANG=C.UTF-8 \
+#  -e LC_ALL=C.UTF-8 \
+#  -e GOPATH=/home/$USER_NAME/go \
+#  -v "$(pwd)":/workspace \
+#  -v gocache:/home/$USER_NAME/go/pkg/mod \
+#  -w /workspace \
+#  dev-ubuntu-rtu \
+#  bash
