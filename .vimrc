@@ -545,10 +545,10 @@ command! SmallerFont call SmallerFont()
 
     Bundle 'mbbill/undotree'
     "Bundle 'Shougo/neocomplcache'
-    Bundle 'Shougo/neosnippet'
+    "Bundle 'Shougo/neosnippet'
     Bundle 'honza/snipmate-snippets'
     Bundle 'vim-scripts/restore_view.vim'
-    ""Bundle 'scrooloose/syntastic'
+    "Bundle 'scrooloose/syntastic'
     Bundle 'godlygeek/tabular'
     Bundle 'spf13/vim-autoclose'
     Bundle 'Lokaltog/vim-easymotion'
@@ -562,7 +562,7 @@ command! SmallerFont call SmallerFont()
     Bundle 'vim-go'
     Bundle 'Lokaltog/vim-powerline'
     Bundle 'majutsushi/tagbar'
-    ""Bundle 'nathanaelkane/vim-indent-guides' and then BundleInstall
+    "Bundle 'nathanaelkane/vim-indent-guides' and then BundleInstall
 
 " }
 
@@ -587,7 +587,7 @@ command! SmallerFont call SmallerFont()
     " Most prefer to automatically switch to the current file directory when
     " a new buffer is opened; to prevent this behavior, add the following to
     " your .vimrc.bundles.local file:
-    "   let g:spf13_no_autochdir = 1
+    let g:spf13_no_autochdir = 1
     if !exists('g:spf13_no_autochdir')
         autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
         " Always switch to the current file directory
@@ -610,7 +610,7 @@ command! SmallerFont call SmallerFont()
         endif
 
         " To disable views add the following to your .vimrc.bundles.local file:
-        "   let g:spf13_no_views = 1
+        let g:spf13_no_views = 1
         if !exists('g:spf13_no_views')
             " Add exclusions to mkview and loadview
             " eg: *.*, svn-commit.tmp
@@ -887,11 +887,6 @@ command! SmallerFont call SmallerFont()
         let g:neocomplcache_force_overwrite_completefunc = 1
 
         " SuperTab like snippets behavior.
-        imap <silent><expr><TAB> neosnippet#expandable() ?
-                    \ "\<Plug>(neosnippet_expand_or_jump)" : (pumvisible() ?
-                    \ "\<C-e>" : "\<TAB>")
-        smap <TAB> <Right><Plug>(neosnippet_jump_or_expand)
-
         " Define dictionary. 
         let g:neocomplcache_dictionary_filetype_lists = {
                     \ 'default' : '',
@@ -906,8 +901,8 @@ command! SmallerFont call SmallerFont()
         let g:neocomplcache_keyword_patterns._ = '\h\w*'
         
         " Plugin key-mappings.     
-        imap <C-k> <Plug>(neosnippet_expand_or_jump)
-        smap <C-k> <Plug>(neosnippet_expand_or_jump)
+        "imap <C-k> <Plug>(neosnippet_expand_or_jump)
+        "smap <C-k> <Plug>(neosnippet_expand_or_jump)
         inoremap <expr><C-g> neocomplcache#undo_completion()
         inoremap <expr><C-l> neocomplcache#complete_common_string()
         inoremap <expr><CR> neocomplcache#complete_common_string()
@@ -944,7 +939,7 @@ command! SmallerFont call SmallerFont()
         let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
 
         " Use honza's snippets.
-        let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate-snippets/snippets'
+        "let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate-snippets/snippets'
 
         " For snippet_complete marker.
         if has('conceal')
