@@ -544,7 +544,7 @@ command! SmallerFont call SmallerFont()
     " }
 
     Bundle 'mbbill/undotree'
-    Bundle 'Shougo/neocomplcache'
+    "Bundle 'Shougo/neocomplcache'
     Bundle 'Shougo/neosnippet'
     Bundle 'honza/snipmate-snippets'
     Bundle 'vim-scripts/restore_view.vim'
@@ -878,7 +878,7 @@ command! SmallerFont call SmallerFont()
     
  " neocomplcache {
         let g:acp_enableAtStartup = 0
-        let g:neocomplcache_enable_at_startup = 1
+        "let g:neocomplcache_enable_at_startup = 1
         let g:neocomplcache_enable_camel_case_completion = 1
         let g:neocomplcache_enable_smart_case = 1
         let g:neocomplcache_enable_underbar_completion = 1
