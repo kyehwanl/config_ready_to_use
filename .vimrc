@@ -1,4 +1,8 @@
 " An example for a vimrc file {
+
+let g:spf13_no_autochdir = 1
+let g:spf13_no_views = 1
+
 "
 " Maintainer:   Bram Moolenaar <Bram@vim.org>
 " Last change:  2006 Aug 12
@@ -1084,6 +1088,97 @@ command! SmallerFont call SmallerFont()
     "colorscheme solarized8_high
   endif
 "}
+
+
+nnoremap <leader>h <C-T>
+nnoremap <leader>l <C-]>
+
+
+
+" chf 프로젝트 경로 내의 어떤 파일이든 열 때 태그와 cscope를 자동으로 추가
+"augroup chf_project
+"    autocmd!
+"    " ~/GolandProjects/chf/ 경로를 포함하는 모든 파일에 적용
+"    autocmd BufRead,BufNewFile */GolandProjects/chf/* set tags+=~/GolandProjects/chf/gotags
+"    autocmd BufRead,BufNewFile */GolandProjects/chf/* silent! cs add ~/GolandProjects/chf/cscope.out
+"augroup END
+
+
+" ==========================================
+" 프로젝트별 태그 및 Cscope 자동 로드 모듈
+" ==========================================
+let s:gotagscope_file = expand("~/.gotagscope.vim")
+if filereadable(s:gotagscope_file)
+    execute 'source ' . s:gotagscope_file
+endif
+
+
+
+" ==========================================
+" [모듈 로드] gopls 최적화 설정 불러오기
+" ==========================================
+let s:gopls_file = expand("~/.gopls.vim")
+if filereadable(s:gopls_file)
+    execute 'source ' . s:gopls_file
+endif
+
+
+" ==========================================
+" [모듈 로드 및 스마트 단축키] gopls 환경 설정
+" ==========================================
+
+" 1. [공통] 일반 파일용 cscope/gotags 기본 매핑 (항상 안전하게 동작)
+nnoremap <leader>l <C-]>
+nnoremap <leader>h <C-T>
+
+" 2. gopls 모듈 파일 확인 및 조건부 로드
+let s:gopls_file = expand("~/.gopls.vim")
+if filereadable(s:gopls_file)
+    " [A] 모듈 로드 성공 시 설정 파일 실행
+    execute 'source ' . s:gopls_file
+    
+    " [B] 모듈이 성공적으로 로드되었을 때만 Go 전용 지능형 단축키 활성화
+    augroup vim_go_smart_mappings
+        autocmd!
+        
+        " (1) Go 파일(.go)에서는 cscope 대신 gopls 엔진으로 덮어쓰기
+        autocmd FileType go nnoremap <buffer> <leader>l :GoDef<CR>
+        autocmd FileType go nnoremap <buffer> <leader>h <C-T>
+        
+        " (2) 코드 탐색 및 리팩토링 단축키
+        autocmd FileType go nnoremap <buffer> <leader>r :GoReferrers<CR>
+        autocmd FileType go nnoremap <buffer> <leader>n :GoRename<Space>
+        autocmd FileType go nnoremap <buffer> <leader>d :GoDoc<CR>
+        
+        " (3) 자동화 도구 단축키 (if err 자동생성, 인터페이스 구현)
+        autocmd FileType go nnoremap <buffer> <leader>e :GoIfErr<CR>
+        autocmd FileType go nnoremap <buffer> <leader>i :GoImpl<Space>
+        
+        " (4) 빌드 및 테스트 단축키
+        autocmd FileType go nnoremap <buffer> <leader>b :GoBuild<CR>
+        autocmd FileType go nnoremap <buffer> <leader>t :GoTest<CR>
+    augroup END
+endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
