@@ -23,3 +23,6 @@ let g:go_fmt_command = "goimports"
 let g:go_diagnostics_enabled = 1
 let g:go_diagnostics_level = 2 " 에러와 경고 모두 표시
 let g:go_metalinter_autosave = 1 " 저장 시 linter(golangci-lint) 백그라운드 실행
+
+" vim-go의 모든 검색 결과를 Location List가 아닌 Quickfix 창으로 강제 통일
+let g:go_list_type = "quickfix"
