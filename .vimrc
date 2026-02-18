@@ -2,6 +2,8 @@
 
 let g:spf13_no_autochdir = 1
 let g:spf13_no_views = 1
+let g:go_jump_to_error = 0 " do not jump when error found in saving time"
+let g:go_list_autowindow = 0 "Quickfix 창이 자동으로 열리는 것도 끄고 싶다면
 
 "
 " Maintainer:   Bram Moolenaar <Bram@vim.org>
@@ -1149,6 +1151,7 @@ if filereadable(s:gopls_file)
         autocmd FileType go nnoremap <buffer> <leader>r :GoReferrers<CR>
         autocmd FileType go nnoremap <buffer> <leader>n :GoRename<Space>
         autocmd FileType go nnoremap <buffer> <leader>d :GoDoc<CR>
+        autocmd FileType go nnoremap <buffer> <leader>c :GoCallers<CR>
         
         " (3) 자동화 도구 단축키 (if err 자동생성, 인터페이스 구현)
         autocmd FileType go nnoremap <buffer> <leader>e :GoIfErr<CR>
