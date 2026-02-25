@@ -601,7 +601,9 @@ command! SmallerFont call SmallerFont()
 
     "set autowrite                       " Automatically write a file when leaving a modified buffer
     set shortmess+=filmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
-    set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
+    "set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
+    set viewoptions=folds,cursor,unix,slash " Better Unix / Windows compatibility, 
+                                            "   where 'option (for buffer-local mappings and local setting) --> now removed'
     set virtualedit=onemore             " Allow for cursor beyond last character
     set history=1000                    " Store a ton of history (default is 20)
     "set spell                           " Spell checking on
@@ -1026,26 +1028,6 @@ command! SmallerFont call SmallerFont()
     endfunction
     " }
 
-" }
-
-" Use fork vimrc if available {
-    if filereadable(expand("~/.vimrc.fork"))
-        source ~/.vimrc.fork
-    endif
-" }
-
-" Use local vimrc if available {
-    if filereadable(expand("~/.vimrc.local2"))
-        source ~/.vimrc.local2
-    endif
-" }
-
-" Use local gvimrc if available and gui is running {
-    if has('gui_running')
-        if filereadable(expand("~/.gvimrc.local"))
-            source ~/.gvimrc.local
-        endif
-    endif
 " }
 
 
