@@ -1097,13 +1097,6 @@ nnoremap <leader>l <C-]>
 
 
 
-" chf 프로젝트 경로 내의 어떤 파일이든 열 때 태그와 cscope를 자동으로 추가
-"augroup chf_project
-"    autocmd!
-"    " ~/GolandProjects/chf/ 경로를 포함하는 모든 파일에 적용
-"    autocmd BufRead,BufNewFile */GolandProjects/chf/* set tags+=~/GolandProjects/chf/gotags
-"    autocmd BufRead,BufNewFile */GolandProjects/chf/* silent! cs add ~/GolandProjects/chf/cscope.out
-"augroup END
 
 
 " ==========================================

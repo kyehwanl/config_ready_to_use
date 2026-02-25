@@ -4,7 +4,7 @@
 " 1. vim-go의 기본 단축키 매핑 비활성화 (우리가 직접 커스텀하기 위함)
 let g:go_def_mapping_enabled = 0
 let g:go_doc_keywordprg_enabled = 0
-let g:go_textobj_enabled = 0
+let g:go_textobj_enabled = 1
 
 " 2. 정의 이동(Def)과 정보 보기(Info)의 핵심 엔진을 gopls로 강제 지정
 let g:go_def_mode = 'gopls'
