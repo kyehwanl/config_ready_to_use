@@ -1140,30 +1140,14 @@ endif
 
 
 
+" vim-go 저장 시 staticcheck(linter) 자동 실행 끄기
+let g:go_metalinter_autosave = 0
+let g:go_diagnostics_enabled = 0"
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+" Mac 환경일 경우에만 시스템 클립보드 연동
+if has("mac") || has("macunix")
+    set clipboard=unnamedplus
+endif
 
 
