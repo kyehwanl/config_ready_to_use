@@ -1147,7 +1147,7 @@ let g:go_diagnostics_enabled = 0"
 
 " Mac 환경일 경우에만 시스템 클립보드 연동
 if has("mac") || has("macunix")
-    set clipboard=unnamedplus
+    set clipboard=unnamed  "unnamedplus has some issues on Mac
 endif
 
 
