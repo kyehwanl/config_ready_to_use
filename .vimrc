@@ -1145,9 +1145,18 @@ let g:go_metalinter_autosave = 0
 let g:go_diagnostics_enabled = 0"
 
 
+" ==========================================
 " Mac 환경일 경우에만 시스템 클립보드 연동
+" ==========================================
+" Currently unnamed or unnamedplus has some issues on Mac, conflict with clipboard
+" in this case, use unnamed or "+p (register,+, paste)
 if has("mac") || has("macunix")
-    set clipboard=unnamed  "unnamedplus has some issues on Mac
+    set clipboard=unnamedplus
+    "set clipboard=unnamed
 endif
+
+
+" diffoption - set diffopt+= ..."
+set diffopt+=iwhiteall,iblank
 
 
