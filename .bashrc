@@ -14,14 +14,10 @@ function setenv () {
 
 
 #setenv DISPLAY :0.0
-setenv LD_LIBRARY_PATH=/usr/local/lib
-setenv NAME ''
-setenv TROFF ptroff
+#setenv LD_LIBRARY_PATH=/usr/local/lib
+#setenv NAME ''
+#setenv TROFF ptroff
 
-PYCSCOPE_PATH=$HOME/pycscope-0.3/build/scripts-2.5/
-#RPKI_UTIL_PATH=$HOME/subvert-rpki.hactrn.net/utils
-PATH=$JAVA_PATH/bin/:$OOP_PATH:$STANDARD_PATH:/opt/gnu/bin:/usr/sbin:/sbin:/usr/lib:/usr/X11R6/bin:$RPKI_UTIL_PATH:$PYCSCOPE_PATH
-STANDARD_PATH=$LOCAL_PATH:$OPENWIN_PATH:$SYSTEM_PATH:$SUNLINK_PATH:$SPECIAL_PATH:$MOUNT_PATH:$TEMP_PATH:$MAN2_PATH:$JAVA_PATH
 
 
 # If running interactively, then:
@@ -34,23 +30,39 @@ prefix=`hostname | sed -e 's/\./-/' -e 's/\..*//' -e 's/-/\./'`
 suffix="-> "
 pound="#"
 
+
+# 1. 히스토리 기본 설정 (함수 밖 상단에 배치)
+HISTSIZE=10000
+HISTFILESIZE=20000
+HISTFILE=~/.history
+export HISTCONTROL=ignoredups
+export HISTIGNORE="pwd:ls:ls -htrl:ll"
+
+# [중요] 여러 터미널에서 히스토리를 덮어쓰지 않고 이어서 기록함
+shopt -s histappend  
+
+
+# 2. 프롬프트 설정 함수 수정
 function set_prompt() {
+    # [추가된 부분] 명령어가 끝날 때마다 즉시 저장하고 다른 세션 기록을 읽어옴
+	# 1. 이전 명령어를 즉시 파일에 저장 (-a)
+	# 2. 다른 세션에서 저장된 새 명령어를 읽어옴 (-n)
+    history -a
+    history -n
+
+    # 기존 프롬프트 설정 로직 유지
 if [ $(id -u) -eq 0 ];
 then
-  #PS1="$prefix [\!]{`dirs|sed -e 's| .*||' -e 's|.*[^/]\(/[^/]*/[^/]*\)|...\1|'`}$suffix" 
-  #PS1="\[\e[01;32m\h\e[m\]\[\e[01;38m [\!]{`dirs|sed -e 's| .*||' -e 's|.*[^/]\(/[^/]*/[^/]*\)|...\1|'`}\e[m\]\$ "
-  PS1="\[\033[01;32m\]\h\[\033[00m\]\[\033[01;38m\] [\!]{`dirs|sed -e 's| .*||' -e 's|.*[^/]\(/[^/]*/[^/]*\)|...\1|'`}\[\033[00m\]$pound "
+        # 루트(root) 계정일 때
+        PS1="\[\033[01;32m\]\h\[\033[00m\]\[\033[01;38m\] [\!]{$(dirs|sed -e 's| .*||' -e 's|.*[^/]\(/[^/]*/[^/]*\)|...\1|')}\[\033[00m\]$pound "
 else
-  PS1="\[\033[01;32m\]\h\[\033[00m\]\[\033[01;38m\] [\!]{`dirs|sed -e 's| .*||' -e 's|.*[^/]\(/[^/]*/[^/]*\)|...\1|'`}\[\033[00m\]\$ "
+        # 일반 계정일 때
+        PS1="\[\033[01;32m\]\h\[\033[00m\]\[\033[01;38m\] [\!]{$(dirs|sed -e 's| .*||' -e 's|.*[^/]\(/[^/]*/[^/]*\)|...\1|')}\[\033[00m\]\$ "
 fi
 }
 
+# 3. PROMPT_COMMAND 설정
 PROMPT_COMMAND=set_prompt
-HISTSIZE=2000
-HISTFILE=~/.history
-#HISTFILESIZE=50
-export HISTCONTROL=ignoredups
-export HISTIGNORE="pwd:ls:ls -htrl:ll"
 
 if [ -f ~/.bash_aliases ]; then
   source ~/.bash_aliases
@@ -65,8 +77,10 @@ export LS_COLORS='rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;
 
 #export TERM=xterm-256color   # without this setting, shell file coloring becomes weird
 export TERM=screen-256color
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME/Download/libevent-2.0.21-stable/_inst/usr/local/lib"
-export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.181-3.b13.el7_5.x86_64/jre
+
+# --- Java (필요한 경우에만 주석 해제 후 경로 확인) ---
+#export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME/Download/libevent-2.0.21-stable/_inst/usr/local/lib"
+#export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.181-3.b13.el7_5.x86_64/jre
 
 # --- golang configuration 
 if [ -f ~/.go ]; then
@@ -74,6 +88,8 @@ if [ -f ~/.go ]; then
 fi
 
 
+# --- Docker Utility ---
+# 사용법: docker-ip <컨테이너이름>
 docker-ip() {
   sudo docker inspect --format '{{ .NetworkSettings.IPAddress }}' "$@"
 }
@@ -133,6 +149,6 @@ fi
 command -v kubecolor >/dev/null 2>&1 && alias kubectl="kubecolor"
 
 
-
+export PATH="$HOME/.docker/bin:$PATH"
 
 
