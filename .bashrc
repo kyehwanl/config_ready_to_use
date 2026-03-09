@@ -31,12 +31,20 @@ suffix="-> "
 pound="#"
 
 
+# -- History Control --
 # 1. 히스토리 기본 설정 (함수 밖 상단에 배치)
 HISTSIZE=10000
 HISTFILESIZE=20000
 HISTFILE=~/.history
-export HISTCONTROL=ignoredups
-export HISTIGNORE="pwd:ls:ls -htrl:ll"
+
+# ignoreboth: ignoredups(연속 중복 무시), ignorespace(앞에 띄어쓰기를 넣고 친 명령어는 기록하지 않음)
+# erasedups: 새 명령어를 칠 때, 전체 히스토리에서 똑같은 이전 명령어를 찾아 삭제합니다. 방금 친 하나만 맨 아래에 남습니다
+export HISTCONTROL=ignoreboth
+#export HISTCONTROL=ignoredups
+#export HISTCONTROL+=:erasedups
+export HISTIGNORE="pwd:ls:ls -htrl:ll:qq:pst:gs:gl*:q:history*"
+#export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S  " #--> ble.sh와 충돌, "bash: history: write error: Broken pipe"
+
 
 # [중요] 여러 터미널에서 히스토리를 덮어쓰지 않고 이어서 기록함
 shopt -s histappend  
@@ -135,6 +143,8 @@ if [ -f ~/.local/share/blesh/ble.sh ]; then
   # Disable some other markers like "[ble: ...]"
   bleopt edit_marker=
   bleopt edit_marker_error=
+  # ble.sh 전용 동기화 사용
+  #bleopt history_share=1  # --> error with history -a, -n  or HISTTIMEFORMAT
 fi
 
 
