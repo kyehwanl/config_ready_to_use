@@ -35,7 +35,15 @@ function! SetupProjectEnv()
         return
     endif
 
-    " 3. gotags 설정 (절대 경로 보장)
+    " [NEW] 3. 일반 ctags 설정 (C/C++ 등을 위한 기본 태그)
+    let l:ctags_path = l:project_root . '/tags'
+    if filereadable(l:ctags_path)
+        if stridx(&tags, l:ctags_path) == -1
+            let &tags = l:ctags_path . "," . &tags
+        endif
+    endif
+
+    " 4. gotags 설정 (절대 경로 보장)
     let l:tag_path = l:project_root . '/gotags'
     if filereadable(l:tag_path)
         if stridx(&tags, l:tag_path) == -1
@@ -43,7 +51,7 @@ function! SetupProjectEnv()
         endif
     endif
 
-    " 4. cscope 설정 (핵심 수정 사항 ★★★)
+    " 5. cscope 설정 (핵심 수정 사항 ★★★)
     let l:cs_path = l:project_root . '/cscope.out'
     if filereadable(l:cs_path)
         " 기존 연결 무조건 끊기 (경로 꼬임 원천 차단)
@@ -57,7 +65,7 @@ function! SetupProjectEnv()
 endfunction
 
 " ---------------------------------------------------------
-" 3. 자동 실행 및 매핑
+" 6. 자동 실행 및 매핑
 " ---------------------------------------------------------
 augroup project_env_auto
     autocmd!

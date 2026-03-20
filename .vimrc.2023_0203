@@ -106,12 +106,12 @@ command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
 " General  {
 "
 "------------------------ LKH additional setting --------------------
-"set tags=./tags,../tags,../../tags,/usr/tags
+set tags=./tags,../tags,../../tags,/usr/tags
 "set tags+=/root/linux/tags
 "set tags+=/root/linux/include/linux/tags " kernel
-"set tags+=/usr/include/tags     " include 
-""set tags+=./tags;/,~/.vimtags
-""set tags+=./gotags,../gotags,../../gotags
+set tags+=/usr/include/tags     " include 
+set tags+=./tags;/,~/.vimtags
+set tags+=./gotags,../gotags,../../gotags
 
 set shiftwidth=4
 set tabstop=8
@@ -523,11 +523,7 @@ command! SmallerFont call SmallerFont()
         " The next three lines ensure that the ~/.vim/bundle/ system works
         filetype on
         filetype off
-        " ---- Vundle Renewal --- 
-        " 1. rm -rf ~/.vim/bundle/Vundle.vim
-        " 2. git clone https://github.com/VundleVim/Vundle.vim.git  ~/.vim/bundle/Vundle.vim
-        " 3. BundleInstall and BundleClean
-        set rtp+=~/.vim/bundle/Vundle.vim
+        set rtp+=~/.vim/bundle/vundle
         call vundle#rc()
     " }
 
@@ -553,29 +549,26 @@ command! SmallerFont call SmallerFont()
         endif
     " }
 
-    Bundle 'VundleVim/Vundle.vim'
     Bundle 'mbbill/undotree'
-    "Bundle 'Shougo/neocomplcache' --> DO NOT install, conflict with vim-go
-    "Bundle 'Shougo/neosnippet'    --> DO NOT install, conflict with vim-go
-    ""Bundle 'honza/vim-snippets'  --> no longer use, auto complete
+    "Bundle 'Shougo/neocomplcache'
+    "Bundle 'Shougo/neosnippet'
+    Bundle 'honza/snipmate-snippets'
     Bundle 'vim-scripts/restore_view.vim'
-    "Bundle 'scrooloose/syntastic' --> DO NOT install, conflict with vim-go
+    "Bundle 'scrooloose/syntastic'
     Bundle 'godlygeek/tabular'
     Bundle 'spf13/vim-autoclose'
-
-    Bundle 'easymotion/vim-easymotion'  
+    Bundle 'Lokaltog/vim-easymotion'
     Bundle 'tpope/vim-fugitive'
-    Bundle 'ctrlpvim/ctrlp.vim' 
+    Bundle 'kien/ctrlp.vim'
 
     Bundle 'klen/python-mode'
     Bundle 'python.vim'
     Bundle 'python_match.vim'
     Bundle 'pythoncomplete'
-
-    Bundle 'fatih/vim-go'
-    Bundle 'vim-airline/vim-airline' 
-    Bundle 'preservim/tagbar'
-    "Bundle 'nathanaelkane/vim-indent-guides' and then BundleInstall --> not my favor
+    Bundle 'vim-go'
+    Bundle 'Lokaltog/vim-powerline'
+    Bundle 'majutsushi/tagbar'
+    "Bundle 'nathanaelkane/vim-indent-guides' and then BundleInstall
 
 " }
 
@@ -1158,40 +1151,12 @@ let g:go_diagnostics_enabled = 0"
 " Currently unnamed or unnamedplus has some issues on Mac, conflict with clipboard
 " in this case, use unnamed or "+p (register,+, paste)
 if has("mac") || has("macunix")
-    "set clipboard=unnamedplus
-    set clipboard=unnamed
+    set clipboard=unnamedplus
+    "set clipboard=unnamed
 endif
 
 
-" ==========================================
 " diffoption - set diffopt+= ..."
 set diffopt+=iwhiteall,iblank
-" ==========================================
-
-" ==========================================
-"  universal tag - showing function name
-" ==========================================
-let g:airline_powerline_fonts = 0  " 0으로 하면 깨지는 화살표 대신 깔끔한 기본 기호 사용
-" 현재 함수 이름 표시 (tagbar 연동)
-let g:airline#extensions#tagbar#enabled = 1
-let g:airline#extensions#whitespace#enabled = 0
-
-
-
-" Mac 기본 ctags 대신 Homebrew universal-ctags를 강제로 사용하도록 지정
-let g:tagbar_ctags_bin = '/opt/homebrew/bin/ctags'
-set updatetime=250 "250ms
-
-
-
-
-
-
-
-
-
-
-
-
 
 
