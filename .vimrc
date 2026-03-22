@@ -576,6 +576,8 @@ command! SmallerFont call SmallerFont()
     Bundle 'vim-airline/vim-airline' 
     Bundle 'preservim/tagbar'
     "Bundle 'nathanaelkane/vim-indent-guides' and then BundleInstall --> not my favor
+    " coc.nvim 설치 (release 브랜치 사용)
+    Bundle 'neoclide/coc.nvim', {'branch': 'release'}
 
 " }
 
@@ -1099,15 +1101,6 @@ endif
 
 
 " ==========================================
-" [모듈 로드] gopls 최적화 설정 불러오기
-" ==========================================
-let s:gopls_file = expand("~/.gopls.vim")
-if filereadable(s:gopls_file)
-    execute 'source ' . s:gopls_file
-endif
-
-
-" ==========================================
 " [모듈 로드 및 스마트 단축키] gopls 환경 설정
 " ==========================================
 
@@ -1146,10 +1139,19 @@ if filereadable(s:gopls_file)
 endif
 
 
-
+" ==========================================
+"  vim-go 기능
+" ==========================================
 " vim-go 저장 시 staticcheck(linter) 자동 실행 끄기
 let g:go_metalinter_autosave = 0
 let g:go_diagnostics_enabled = 0"
+
+" vim-go documentation popup -- currnet mapping key: ,d (NOT shift k)
+let g:go_doc_popup_window = 1
+
+" 저장할 때 자동으로 import를 정렬하고 누락된 것을 채워줌
+let g:go_fmt_command = "goimports""
+
 
 
 " ==========================================
@@ -1184,13 +1186,126 @@ set updatetime=250 "250ms
 
 
 
+" ==========================================
+" Airline 이상한 땜빵 기호 깔끔한 영문으로 교체
+" ==========================================
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_symbols.branch = ' Git:' " 왼쪽 브랜치 이름 깔끔하게
+
+" ==========================================
+" [핵심] 오른쪽 하단(Z섹션) 고정 너비 지정으로 흔들림 방지
+" %3p: 퍼센트 3자리 고정 (예: 100,  98)
+" %4l: 현재 줄 4자리 고정 (예:  569)
+" %4L: 전체 줄 4자리 고정 (예: 2991)
+" %3c: 현재 열 3자리 고정 (예:   1,  17)
+" ==========================================
+let g:airline_section_z = '%3p%% LN:%4l/%4L MAX | COL:%3c'
 
 
 
+" =========================================================
+" [최종 통합] COC 지능형 점프 + 전통적 Tag Stack(C-T) 유지
+" =========================================================
+
+" 1. 하이브리드 점프 함수 (지능형 점프 전 스택에 현재 위치 저장)
+function! CocJumpWithTagStack()
+    " coc.nvim 함수가 존재할 때만 실행
+    if exists('*CocActionAsync')
+        let l:tag = expand('<cword>')
+        let l:pos = [bufnr('%'), line('.'), col('.'), 0]
+        let l:item = {'tagname': l:tag, 'from': l:pos}
+        call settagstack(win_getid(), {'items': [l:item]}, 'a')
+        
+        call CocActionAsync('jumpDefinition')
+    else
+        " coc가 없는 환경에서는 기존 태그 점프(C-]) 실행
+        execute "normal! \<C-]>"
+    endif
+endfunction
+
+" 2. 팝업 표시 헬퍼 함수 (if 블록 밖으로 꺼내어 범용성 확보)
+function! ShowDocumentation()
+    if exists('*CocActionAsync') && CocAction('hasProvider', 'hover')
+        call CocActionAsync('doHover')
+    else
+        if &filetype == 'go'
+            execute 'GoDoc'
+        else
+            " coc가 없으면 기본 K (man page) 동작
+            call feedkeys('K', 'in')
+        endif
+    endif
+endfunction
+
+" 3. 통합 스마트 매핑 그룹 (어떤 환경에서도 에러 없이 작동)
+augroup coc_smart_mappings
+    autocmd!
+    " Go, C, C++ 파일 공통
+    autocmd FileType go,c,cpp nnoremap <buffer> <leader>l :call CocJumpWithTagStack()<CR>
+    autocmd FileType go,c,cpp nnoremap <buffer> <leader>h <C-T>
+    
+    " 설명 팝업
+    autocmd FileType go,c,cpp nnoremap <buffer> <leader>d :call ShowDocumentation()<CR>
+    autocmd FileType go,c,cpp nnoremap <buffer> K :call ShowDocumentation()<CR>
+augroup END
 
 
 
+" 4. 자동완성 메뉴 조작 (고급 기능 및 coc가 있을 때만 작동하도록 내부에 방어 로직 결합)
 
+" 헬퍼 함수: 커서 앞에 글자가 있는지 확인 (로컬 스크립트 전용 s: 붙임)
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" <TAB>: 팝업이 켜져있으면 다음 항목, 글자 중간이면 팝업 강제 호출, 아니면 일반 탭
+inoremap <silent><expr> <TAB>
+    \ exists('g:did_coc_loaded') && coc#pum#visible() ? coc#pum#next(1) :
+    \ exists('g:did_coc_loaded') && !<SID>check_back_space() ? coc#refresh() :
+    \ "\<Tab>"
+
+" <S-TAB> (Shift+Tab): 팝업이 켜져있으면 이전 항목, 아니면 백스페이스
+inoremap <silent><expr> <S-TAB>
+    \ exists('g:did_coc_loaded') && coc#pum#visible() ? coc#pum#prev(1) :
+    \ "\<C-h>"
+
+" <CR> (Enter): 팝업이 켜져있으면 선택 확정, 아니면 일반 엔터(+서식 정렬)
+inoremap <silent><expr> <CR>
+    \ exists('g:did_coc_loaded') && coc#pum#visible() ? coc#pum#confirm() :
+    \ "\<C-g>u\<CR>\<c-r>=(exists('g:did_coc_loaded') ? coc#on_enter() : '')\<CR>"
+
+
+
+" =========================================================
+" [OS 통합 설정] Mac(Homebrew) vs Linux(Ubuntu/Docker)
+" =========================================================
+
+if has("mac") || has("macunix")
+    " 1. Mac: Homebrew 전용 ctags 경로 지정 
+    let g:tagbar_ctags_bin = '/opt/homebrew/bin/ctags'
+    
+    " 2. Mac 클립보드: unnamed (충돌 방지용) 
+    set clipboard=unnamed
+
+elseif has("unix")
+    " 3. Linux (Ubuntu/Docker): 시스템 기본 경로의 ctags 사용
+    " 보통 /usr/bin/ctags 에 위치하므로 따로 지정하지 않아도 알아서 찾습니다.
+    if filereadable('/usr/bin/ctags')
+        let g:tagbar_ctags_bin = '/usr/bin/ctags'
+    endif
+
+    " 4. Linux 클립보드: X11이 없는 서버/Docker 환경 고려
+    " 시스템에 xclip이나 xsel이 설치되어 있을 때만 unnamedplus 사용
+    if executable('xclip') || executable('xsel')
+        set clipboard=unnamedplus
+    endif
+endif
+
+" 공통: ctags 업데이트 주기 설정
+set updatetime=250
 
 
 
