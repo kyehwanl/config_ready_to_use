@@ -456,5 +456,5 @@ nnoremap <f8> :delete<cr>
 "
 " nnoremap <left> <nop>
 
-" mouse function, a:all, n:normal, v=visual
+" mouse function, a:all, n:normal, v=visual (version v0.13 or later)
 set mouse=a

@@ -818,9 +818,9 @@ command! SmallerFont call SmallerFont()
                 \endif
         endif
 
-        hi Pmenu  guifg=#000000 guibg=#F8F8F8 ctermfg=black ctermbg=Lightgray
-        hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=lightgray cterm=NONE
-        hi PmenuThumb  guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE
+        "hi Pmenu  guifg=#000000 guibg=#F8F8F8 ctermfg=black ctermbg=Lightgray
+        "hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=lightgray cterm=NONE
+        "hi PmenuThumb  guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE
 
         " Some convenient mappings
         inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
@@ -903,76 +903,6 @@ command! SmallerFont call SmallerFont()
         nnoremap <silent> <leader>gp :Git push<CR>
     "}
     
- " neocomplcache {
-        let g:acp_enableAtStartup = 0
-        "let g:neocomplcache_enable_at_startup = 1
-        let g:neocomplcache_enable_camel_case_completion = 1
-        let g:neocomplcache_enable_smart_case = 1
-        let g:neocomplcache_enable_underbar_completion = 1
-        let g:neocomplcache_enable_auto_delimiter = 1
-        let g:neocomplcache_max_list = 15
-        let g:neocomplcache_force_overwrite_completefunc = 1
-
-        " SuperTab like snippets behavior.
-        " Define dictionary. 
-        let g:neocomplcache_dictionary_filetype_lists = {
-                    \ 'default' : '',
-                    \ 'vimshell' : $HOME.'/.vimshell_hist',
-                    \ 'scheme' : $HOME.'/.gosh_completions'
-                    \ }
-
-        " Define keyword.
-        if !exists('g:neocomplcache_keyword_patterns')
-            let g:neocomplcache_keyword_patterns = {}
-        endif
-        let g:neocomplcache_keyword_patterns._ = '\h\w*'
-        
-        " Plugin key-mappings.     
-        "imap <C-k> <Plug>(neosnippet_expand_or_jump)
-        "smap <C-k> <Plug>(neosnippet_expand_or_jump)
-        inoremap <expr><C-g> neocomplcache#undo_completion()
-        inoremap <expr><C-l> neocomplcache#complete_common_string()
-        inoremap <expr><CR> neocomplcache#complete_common_string()
-
-        " <TAB>: completion.
-        inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-        inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
-
-        " <CR>: close popup
-        " <s-CR>: close popup and save indent.
-        inoremap <expr><s-CR> pumvisible() ? neocomplcache#close_popup()"\<CR>" : "\<CR>"
-        inoremap <expr><CR> pumvisible() ? neocomplcache#close_popup() : "\<CR>"
-
-        " <C-h>, <BS>: close popup and delete backword char.
-        inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-        inoremap <expr><C-y> neocomplcache#close_popup()
-
-        " Enable omni completion.
-        autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-        autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-        autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-        autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-        autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-        autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-
-   	" Enable heavy omni completion.
-        if !exists('g:neocomplcache_omni_patterns')
-            let g:neocomplcache_omni_patterns = {}
-        endif
-        let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-        let g:neocomplcache_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-        let g:neocomplcache_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-        let g:neocomplcache_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-        let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
-
-        " Use honza's snippets.
-        "let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate-snippets/snippets'
-
-        " For snippet_complete marker.
-        if has('conceal')
-            set conceallevel=2 concealcursor=i
-        endif
-    " }
 
  " UndoTree {
         nnoremap <Leader>u :UndotreeToggle<CR>
@@ -1319,4 +1249,32 @@ set updatetime=250
 
 
 
+" =========================================================
+" [통합 UI] 자동완성 팝업(Pmenu) 색상 커스텀 (완벽 방어 및 색상 교정)
+" =========================================================
 
+function! ApplyCustomPmenuColors()
+    " 1. Vim 기본 팝업창 색상
+    " ctermbg=24 는 256색 환경에서 확실히 구분되는 '어두운 파란색(Navy)' 입니다.
+	" popup-menu창색을 바꾸려면 Pmenu ctermbg,, CocPum ctermbg, CocFloating ctermbg 적용
+    highlight Pmenu ctermbg=239 ctermfg=250 guibg=#1c2c35 guifg=#93a1a1
+    highlight PmenuSel ctermbg=32 ctermfg=255 guibg=#268bd2 guifg=#fdf6e3
+    highlight PmenuSbar ctermbg=235 guibg=#073642
+    highlight PmenuThumb ctermbg=240 guibg=#586e75
+
+    " 2. coc.nvim 전용 플로팅 팝업창 색상 강제 지정
+    " (coc가 없는 깡통 컨테이너에서도 에러 없이 안전하게 무시됨)
+    highlight CocPum ctermbg=239 ctermfg=250 guibg=#1c2c35 guifg=#93a1a1
+    highlight CocMenuSel ctermbg=32 ctermfg=255 guibg=#268bd2 guifg=#fdf6e3
+    highlight CocFloating ctermbg=239 ctermfg=250 guibg=#1c2c35 guifg=#93a1a1
+endfunction
+
+" 3. 열악한 컨테이너/Pod 환경(16색 터미널 등)을 위한 완벽 방어막
+if &t_Co >= 256 || has("gui_running")
+    augroup CustomPmenuColors
+        autocmd!
+        " 테마 변경 시점 & Vim 로딩이 완전히 끝난 직후 강제 덮어쓰기
+        autocmd ColorScheme * call ApplyCustomPmenuColors()
+        autocmd VimEnter * call ApplyCustomPmenuColors()
+    augroup END
+endif
