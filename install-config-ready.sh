@@ -93,7 +93,7 @@ git clone https://github.com/kyehwanl/config_ready_to_use.git
 unalias cp
 cp -rf config_ready_to_use/.[a-z]* config_ready_to_use/* ./
 rm -rf config_ready_to_use
-find ./ -name '*.tar.gz' | xargs -I % tar xvfz % > /dev/null
+find ./ -name '*.tar.gz' | grep -v '2023' | xargs -I % tar xvfz % > /dev/null
 export TERM=screen-256color
 
 

@@ -1,5 +1,16 @@
 " An example for a vimrc file {
 
+" =========================================================
+"  Language Support
+" =========================================================
+set encoding=utf-8
+set fileencodings=utf-8,cp949,euc-kr
+set termencoding=utf-8
+
+
+" =========================================================
+"  Gloabal Variables
+" =========================================================
 let g:spf13_no_autochdir = 1
 let g:spf13_no_views = 1
 let g:go_jump_to_error = 0 " do not jump when error found in saving time"
@@ -706,8 +717,7 @@ command! SmallerFont call SmallerFont()
     set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
     "set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
     " Remove trailing whitespaces and ^M chars
-    autocmd FileType c,cpp,java,php,javascript,python,twig,xml,yml 
-    ""autocmd BufWritePre <buffer> call StripTrailingWhi#
+    autocmd FileType c,cpp,java,php,javascript,python,twig,xml,yml autocmd BufWritePre <buffer> call StripTrailingWhitespace()
     autocmd BufNewFile,BufRead *.html.twig set filetype=html.twig
 
 " }
