@@ -1069,7 +1069,7 @@ if filereadable(s:gopls_file)
         autocmd FileType go nnoremap <buffer> <leader>c :GoCallers<CR>
         
         " (3) 자동화 도구 단축키 (if err 자동생성, 인터페이스 구현)
-        autocmd FileType go nnoremap <buffer> <leader>e :GoIfErr<CR>
+        autocmd FileType go nnoremap <buffer> <leader>ie :GoIfErr<CR>
         autocmd FileType go nnoremap <buffer> <leader>i :GoImpl<Space>
         
         " (4) 빌드 및 테스트 단축키
@@ -1142,6 +1142,7 @@ let g:airline_symbols.branch = ' Git:' " 왼쪽 브랜치 이름 깔끔하게
 " %3c: 현재 열 3자리 고정 (예:   1,  17)
 " ==========================================
 let g:airline_section_z = '%3p%% LN:%4l/%4L MAX | COL:%3c'
+let g:airline_section_y = ''
 
 
 
@@ -1267,6 +1268,9 @@ function! ApplyCustomPmenuColors()
     highlight CocPum ctermbg=239 ctermfg=250 guibg=#1c2c35 guifg=#93a1a1
     highlight CocMenuSel ctermbg=32 ctermfg=255 guibg=#268bd2 guifg=#fdf6e3
     highlight CocFloating ctermbg=239 ctermfg=250 guibg=#1c2c35 guifg=#93a1a1
+
+    " 팝업창 내부의 '경고(Warning)' 텍스트 색상을 밝은 노란색으로 변경
+    highlight CocWarningFloat ctermfg=226 guifg=#ffff00
 endfunction
 
 " 3. 열악한 컨테이너/Pod 환경(16색 터미널 등)을 위한 완벽 방어막
