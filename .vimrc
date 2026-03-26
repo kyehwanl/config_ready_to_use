@@ -895,11 +895,13 @@ command! SmallerFont call SmallerFont()
     "}
 
  " Fugitive {
-        nnoremap <silent> <leader>gs :Gstatus<CR>
-        nnoremap <silent> <leader>gd :Gdiff<CR>
-        nnoremap <silent> <leader>gc :Gcommit<CR>
-        nnoremap <silent> <leader>gb :Gblame<CR>
-        nnoremap <silent> <leader>gl :Glog<CR>
+	  nnoremap <silent> <leader>gs :Git<CR>
+	  nnoremap <silent> <leader>gd :Gdiffsplit<CR>
+	  nnoremap <silent> <leader>gv :Gvdiffsplit<CR>
+	  nnoremap <silent> <leader>gc :Git commit<CR>
+	  nnoremap <silent> <leader>gb :Git blame<CR>
+	  nnoremap <silent> <leader>gl :Git log<CR>
+	  nnoremap <silent> <leader>gcl :Gclog<CR>
         nnoremap <silent> <leader>gp :Git push<CR>
     "}
     
