@@ -1284,3 +1284,28 @@ if &t_Co >= 256 || has("gui_running")
         autocmd VimEnter * call ApplyCustomPmenuColors()
     augroup END
 endif
+
+
+" =====================================================================
+" [버그 픽스 & 하이브리드 팁] Python 플러그인의 ]c, [c 글로벌 매핑 부분 삭제
+" 
+" 파이썬 플러그인이 Git Diff 기본 이동키를 강제로 덮어쓰는 문제를 해결하되,
+" 'nunmap' (노멀 모드 매핑 취소)만 사용하여 두 가지 기능을 모두 살린 세팅
+"
+" [사용 방법]
+" 1. 노멀 모드 (평상시) : ]c 또는 [c 를 누르면 순정 Git Diff(다음/이전 변경점)로 점프
+" 2. 비주얼 모드 (파이썬) : 파이썬 파일에서 'v'로 비주얼 모드 진입 후 ]c 를 누르면
+"                         플러그인 기능이 발동하여 '클래스(Class) 전체'가 블록 선택
+" =====================================================================
+augroup FixPythonDiffGlobal
+    autocmd!
+    " 1. Vim이 모든 플러그인을 다 불러온 직후(VimEnter)에 전역 매핑을 날려버림
+    autocmd VimEnter * silent! nunmap ]c
+    autocmd VimEnter * silent! nunmap [c
+    
+    " 2. 혹시라도 파이썬 파일을 열 때 다시 생기는 것을 방지
+    autocmd FileType python silent! nunmap <buffer> ]c
+    autocmd FileType python silent! nunmap <buffer> [c
+augroup END
+
+
