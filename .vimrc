@@ -1309,3 +1309,40 @@ augroup FixPythonDiffGlobal
 augroup END
 
 
+
+" ==========================================
+" 	Jump to the reference
+"   스마트 정의 이동 (CoC & ctags 호환)
+" ==========================================
+function! SmartJumpDefinition(direction)
+    " 1. CoC가 설치되어 있고 함수가 존재하는지 런타임에 확인
+    if exists('*CocAction')
+        call CocAction('jumpDefinition', a:direction)
+    else
+        " 2. CoC가 없을 경우 Vim 기본 ctags 활용
+        let l:word = expand("<cword>")
+
+        try
+            if a:direction ==# 'split'
+                " 수평 분할 후 태그 이동
+                execute "stag " . l:word
+            elseif a:direction ==# 'vsplit'
+                " 수직 분할 후 태그 이동
+                execute "vert stag " . l:word
+            endif
+        catch
+            " 태그를 찾을 수 없을 때 에러 메시지 출력
+            echo "Tag not found: " . l:word
+        endtry
+    endif
+endfunction
+
+" 단축키 매핑 (함수 호출)
+nnoremap <silent> ,L :call SmartJumpDefinition('split')<CR>
+nnoremap <silent> ,v :call SmartJumpDefinition('vsplit')<CR>
+
+
+
+
+
+
