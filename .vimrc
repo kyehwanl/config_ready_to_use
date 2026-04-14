@@ -1342,7 +1342,18 @@ nnoremap <silent> ,L :call SmartJumpDefinition('split')<CR>
 nnoremap <silent> ,v :call SmartJumpDefinition('vsplit')<CR>
 
 
+" ==========================================
+" 창 크기 조절 (방향키 사용, 한 번에 10씩)
+" ==========================================
 
+nnoremap + :resize +10<CR>
+nnoremap - :resize -10<CR>
+nnoremap < :vertical resize -10<CR>
+nnoremap > :vertical resize +10<CR>
 
+""nnoremap <Up> :resize +10<CR>
+""nnoremap <Down> :resize -10<CR>
+""nnoremap <Left> :vertical resize -10<CR>
+""nnoremap <Right> :vertical resize +10<CR>
 
 
