@@ -1359,3 +1359,25 @@ nnoremap > :vertical resize +10<CR>
 ""nnoremap <Right> :vertical resize +10<CR>
 
 
+
+" =========================================================
+" [UI] 프로그래밍 언어 파일 자동 줄 번호(Line Number) 설정
+" =========================================================
+augroup ProgrammingLineNumbers
+    autocmd!
+    " .go, .c, .cpp, .h, .py 파일 등에 대해 줄 번호를 자동으로 활성화
+    " .h 파일은 보통 c 또는 cpp filetype으로 인식됩니다.
+    autocmd FileType go,c,cpp,python setlocal number
+augroup END
+
+
+
+
+
+
+
+
+
+
+
+
