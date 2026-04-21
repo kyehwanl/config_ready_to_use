@@ -709,7 +709,7 @@ command! SmallerFont call SmallerFont()
 
     set nowrap                      " Wrap long lines
     set autoindent                  " Indent at the same level of the previous line
-    set shiftwidth=2                " (sw) Use indents of 4 spaces
+    set shiftwidth=4                " (sw) Use indents of 4 spaces
     set expandtab                   " Tabs are spaces, not tabs
     set tabstop=4                   " (ts) An indentation every four columns                                               
     set softtabstop=4               " (sts) Let backspace delete indent
