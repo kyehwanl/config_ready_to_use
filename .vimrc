@@ -1344,6 +1344,27 @@ nnoremap <silent> ,L :call SmartJumpDefinition('split')<CR>
 nnoremap <silent> ,v :call SmartJumpDefinition('vsplit')<CR>
 
 
+" ================================================
+" CoC.nvim Node.js 경로 자동 탐색 (vifm/nvm 호환)
+" ================================================
+" 1. 먼저 시스템 환경변수에 node가 있는지 확인
+if executable('node')
+    let g:coc_node_path = exepath('node')
+else
+    " 2. 환경변수에 없다면 (vifm 등에서 실행 시), nvm의 'default' 버전 경로를 추적
+    " 아래 경로는 nvm이 관리하는 '기본 버전'의 심볼릭 링크(Alias) 경로입니다.
+    let s:nvm_default_node = expand('~/.nvm/versions/node/') . system('nvm alias default | awk "{print $3}" | tr -d "\n"') . '/bin/node'
+    
+    if filereadable(s:nvm_default_node)
+        let g:coc_node_path = s:nvm_default_node
+    else
+        " 3. 만약 위 로직도 실패하면, 가장 안정적인 버전을 수동으로 지정 (최후의 보루)
+        let g:coc_node_path = expand('~/.nvm/versions/node/v22.22.2/bin/node')
+    endif
+endif
+
+
+
 " ==========================================
 " 창 크기 조절 (방향키 사용, 한 번에 10씩)
 " ==========================================
