@@ -42,7 +42,7 @@ HISTFILE=~/.history
 export HISTCONTROL=ignoreboth
 #export HISTCONTROL=ignoredups
 #export HISTCONTROL+=:erasedups
-export HISTIGNORE="pwd:ls:ls -htrl:ll:qq:pst:gs:gl*:q:history*"
+export HISTIGNORE="pwd:ls:ls -htrl:ll:qq:pst:gs:gl*:q:history*:lh:lhg"
 #export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S  " #--> ble.sh와 충돌, "bash: history: write error: Broken pipe"
 
 
@@ -50,27 +50,51 @@ export HISTIGNORE="pwd:ls:ls -htrl:ll:qq:pst:gs:gl*:q:history*"
 shopt -s histappend  
 
 
+# --- [추가: 2026.0519] 현재 터미널(세션) 전용 히스토리 파일 설정 ---
+# 터미널마다 고유한 프로세스 ID($$)를 사용하여 파일 분리
+export LOCAL_HISTFILE="/tmp/bash_history_local_$$"
+
+# 터미널 종료 시 로컬 임시 파일을 삭제하여 디스크를 깔끔하게 유지
+trap 'rm -f "$LOCAL_HISTFILE"' EXIT
+
+
 # 2. 프롬프트 설정 함수 수정
 function set_prompt() {
-    # [추가된 부분] 명령어가 끝날 때마다 즉시 저장하고 다른 세션 기록을 읽어옴
-	# 1. 이전 명령어를 즉시 파일에 저장 (-a)
-	# 2. 다른 세션에서 저장된 새 명령어를 읽어옴 (-n)
+    # (1) 'history -n'으로 다른터미널의 명령어가 섞이기 직전에, 방금 내가 친 명령어 추출
+    #     (sed 정규식: 히스토리 명령어 앞의 공백과 번호를 깔끔하게 제거)
+    local last_cmd=$(history 1 | sed -e 's/^[[:space:]]*[0-9]\+[[:space:]]*\*?[[:space:]]*//')
+
+    # (2) 현재 터미널 전용 히스토리 파일에 기록 (연속 중복 명령어 방지)
+    if [[ -n "$last_cmd" && "$last_cmd" != "$_PREV_LOCAL_CMD" ]]; then
+        echo "$last_cmd" >> "$LOCAL_HISTFILE"
+        export _PREV_LOCAL_CMD="$last_cmd"
+    fi
+
+    # (3) [기존 로직 유지] 전체 터미널 히스토리 동기화
+    #   - 명령어가 끝날 때마다 즉시 저장하고 다른 세션 기록을 읽어옴
+	# 	--  이전 명령어를 즉시 파일에 저장 (-a)
+	# 	--  다른 세션에서 저장된 새 명령어를 읽어옴 (-n)
     history -a
     history -n
 
-    # 기존 프롬프트 설정 로직 유지
-if [ $(id -u) -eq 0 ];
-then
+    # 4. [기존 로직 유지] 프롬프트 렌더링
+    if [ $(id -u) -eq 0 ]; then
         # 루트(root) 계정일 때
         PS1="\[\033[01;32m\]\h\[\033[00m\]\[\033[01;38m\] [\!]{$(dirs|sed -e 's| .*||' -e 's|.*[^/]\(/[^/]*/[^/]*\)|...\1|')}\[\033[00m\]$pound "
-else
+    else
         # 일반 계정일 때
         PS1="\[\033[01;32m\]\h\[\033[00m\]\[\033[01;38m\] [\!]{$(dirs|sed -e 's| .*||' -e 's|.*[^/]\(/[^/]*/[^/]*\)|...\1|')}\[\033[00m\]\$ "
-fi
+    fi
 }
 
 # 3. PROMPT_COMMAND 설정
 PROMPT_COMMAND=set_prompt
+
+# --- [추가, 2026.0519] 현재 터미널 히스토리 전용 Alias ---
+alias lh='cat -n $LOCAL_HISTFILE'          # 현재 터미널 히스토리 전체 보기
+alias lhg='cat -n $LOCAL_HISTFILE | grep'  # 현재 터미널 히스토리 검색 (예: lhg docker)
+
+
 
 if [ -f ~/.bash_aliases ]; then
   source ~/.bash_aliases
@@ -160,5 +184,13 @@ command -v kubecolor >/dev/null 2>&1 && alias kubectl="kubecolor"
 
 
 export PATH="$HOME/.docker/bin:$PATH"
+###########################################################
+#  node, nvm 
+# 
+###########################################################
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
 
+. "$HOME/.local/bin/env"
