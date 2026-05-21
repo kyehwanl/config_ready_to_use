@@ -58,16 +58,20 @@ export LOCAL_HISTFILE="/tmp/bash_history_local_$$"
 trap 'rm -f "$LOCAL_HISTFILE"' EXIT
 
 
-# 2. 프롬프트 설정 함수 수정
+
+# 2. 프롬프트 설정 함수 수정 (버그 픽스 적용)
 function set_prompt() {
-    # (1) 'history -n'으로 다른터미널의 명령어가 섞이기 직전에, 방금 내가 친 명령어 추출
-    #     (sed 정규식: 히스토리 명령어 앞의 공백과 번호를 깔끔하게 제거)
+    # 1. 사용자가 이번 프롬프트에서 실제로 명령어를 쳤는지 확인
+    # HISTCMD가 이전 프롬프트가 끝날 때 저장해둔 값보다 커야만 새 명령어를 친 것임
+    if [[ -z "$_PREV_HISTCMD" ]] || [[ $HISTCMD -gt $_PREV_HISTCMD ]]; then
+        # (1) 방금 내가 친 명령어 추출 (sed 정규식: 히스토리 명령어 앞의 공백과 번호를 깔끔하게 제거)
     local last_cmd=$(history 1 | sed -e 's/^[[:space:]]*[0-9]\+[[:space:]]*\*?[[:space:]]*//')
 
     # (2) 현재 터미널 전용 히스토리 파일에 기록 (연속 중복 명령어 방지)
     if [[ -n "$last_cmd" && "$last_cmd" != "$_PREV_LOCAL_CMD" ]]; then
         echo "$last_cmd" >> "$LOCAL_HISTFILE"
         export _PREV_LOCAL_CMD="$last_cmd"
+    fi
     fi
 
     # (3) [기존 로직 유지] 전체 터미널 히스토리 동기화
@@ -77,7 +81,11 @@ function set_prompt() {
     history -a
     history -n
 
-    # 4. [기존 로직 유지] 프롬프트 렌더링
+    # (4) 다음 프롬프트를 위해 현재의 HISTCMD 저장
+    # (history -n 직후에 저장해야 다른 터미널에서 주입된 개수까지 포함하여 정확한 기준점이 됨)
+    export _PREV_HISTCMD=$HISTCMD
+
+    # (5) [기존 로직 유지] 프롬프트 렌더링
     if [ $(id -u) -eq 0 ]; then
         # 루트(root) 계정일 때
         PS1="\[\033[01;32m\]\h\[\033[00m\]\[\033[01;38m\] [\!]{$(dirs|sed -e 's| .*||' -e 's|.*[^/]\(/[^/]*/[^/]*\)|...\1|')}\[\033[00m\]$pound "
