@@ -1392,7 +1392,8 @@ augroup ProgrammingLineNumbers
 augroup END
 
 
-
+" 검색 중 현재 커서가 있는 단어(IncSearch)도 search fg: orange, bg: blue
+hi IncSearch ctermfg=166 ctermbg=blue guifg=#cb4b16 guibg=NONE
 
 
 
