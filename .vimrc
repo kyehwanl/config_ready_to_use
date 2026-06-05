@@ -1068,7 +1068,7 @@ if filereadable(s:gopls_file)
         autocmd FileType go nnoremap <buffer> <leader>r :GoReferrers<CR>
         autocmd FileType go nnoremap <buffer> <leader>n :GoRename<Space>
         autocmd FileType go nnoremap <buffer> <leader>d :GoDoc<CR>
-        autocmd FileType go nnoremap <buffer> <leader>c :GoCallers<CR>
+        autocmd FileType go nnoremap <buffer> <leader>C :GoCallers<CR>
         
         " (3) 자동화 도구 단축키 (if err 자동생성, 인터페이스 구현)
         autocmd FileType go nnoremap <buffer> <leader>ie :GoIfErr<CR>
@@ -1187,13 +1187,19 @@ endfunction
 " 3. 통합 스마트 매핑 그룹 (어떤 환경에서도 에러 없이 작동)
 augroup coc_smart_mappings
     autocmd!
-    " Go, C, C++ 파일 공통
+    " Go, C, C++ 파일 공통 기초 네비게이션
     autocmd FileType go,c,cpp nnoremap <buffer> <leader>l :call CocJumpWithTagStack()<CR>
     autocmd FileType go,c,cpp nnoremap <buffer> <leader>h <C-T>
-    
+
     " 설명 팝업
     autocmd FileType go,c,cpp nnoremap <buffer> <leader>d :call ShowDocumentation()<CR>
     autocmd FileType go,c,cpp nnoremap <buffer> K :call ShowDocumentation()<CR>
+
+    " [coctree] Go 파일 전용: Goland style (Navigate-Call Hierarchy) 정밀 호출 구조 추적 트랙
+    " ,c : Calling (나를 호출하는 상위 함수 트리 빌드)
+    autocmd FileType go nnoremap <buffer> <leader>c :call CocActionAsync('showIncomingCalls')<CR>
+    " ,o : Called (내가 호출하는 하위 함수 트리 빌드)
+    autocmd FileType go nnoremap <buffer> <leader>o :call CocActionAsync('showOutgoingCalls')<CR>
 augroup END
 
 
