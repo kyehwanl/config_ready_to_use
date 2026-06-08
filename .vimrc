@@ -577,6 +577,7 @@ command! SmallerFont call SmallerFont()
     Bundle 'easymotion/vim-easymotion'  
     Bundle 'tpope/vim-fugitive'
     Bundle 'ctrlpvim/ctrlp.vim' 
+    Bundle 'airblade/vim-gitgutter'
 
     Bundle 'klen/python-mode'
     Bundle 'python.vim'
@@ -1398,10 +1399,16 @@ augroup ProgrammingLineNumbers
 augroup END
 
 
+
+" =========================================================
+" [ETC] 
+" =========================================================
+"
 " 검색 중 현재 커서가 있는 단어(IncSearch)도 search fg: orange, bg: blue
 hi IncSearch ctermfg=166 ctermbg=blue guifg=#cb4b16 guibg=NONE
 
-
+" 노멀 모드에서 ,tg를 누르면 왼쪽 Git 변경점 마커가 켜지고 꺼짐
+nnoremap <silent> <leader>tg :GitGutterSignsToggle<CR>
 
 
 
