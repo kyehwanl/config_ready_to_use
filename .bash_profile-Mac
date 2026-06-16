@@ -1,0 +1,14 @@
+export PATH="/opt/homebrew/bin:$PATH"
+if [ -f ~/.bashrc ]; then
+    source ~/.bashrc
+fi
+
+alias ll='ls -htrl'
+
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
+export PATH=$PATH:/usr/local/go/bin
+
+export PATH="/opt/homebrew/opt/python@3.14/libexec/bin:$PATH"
+
+. "$HOME/.local/bin/env"
