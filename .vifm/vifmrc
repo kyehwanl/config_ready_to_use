@@ -141,6 +141,7 @@ map w :view<cr>
 set wildmenu
 command du !!du -sh %f
 command dU !!du -h --max-depth=1 --apparent-size | sort -rh
+"command dU !!du -h -d 1 | sort -rh  " for MacOS
 command Q :execute '!echo %d > ~/.vifm/lastdir' | quit
 command Diff vim -d %f %F
 ""command make  !!make -f %c
@@ -155,7 +156,11 @@ command gdb gdb --args %f %a
 command ldd !!ldd %f
 command vim !vim %a
 
-filter '(\.([sl])?o|\.a|.*~)$'
+"filter '(\.([sl])?o|\.a|.*~)$'
+
+" 순수 Vim 스타일 정규식"
+filter /\.\([sl]\)\?o$\|\.a$\|~$/
+
 " in cpoptions(cpo), 't' enables 'tab' to switch between panes like space, otherwise forward in history. so 't' is opted out
 set cpo=fs
 
