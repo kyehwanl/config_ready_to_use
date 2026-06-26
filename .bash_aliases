@@ -1,3 +1,6 @@
+# GNU ls를 기본 ls로 지정 (in MacOS, brew install coreutils 필요)
+#alias ls='gls --color=auto'
+
 # Some useful aliases.
 alias h='history'
 alias j="jobs -l"
@@ -10,6 +13,8 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias grep='grep --color=auto'
 alias pst='pstree -hupl | grep `echo $$`'
+# for MacOS pst
+# alias pst='pstree -p $$ | grep "vif[m]"'  
 #alias vifm='source ~/vf'
 #alias vim='vim -T xterm-256color'
 alias dl='docker ps -l -q'
