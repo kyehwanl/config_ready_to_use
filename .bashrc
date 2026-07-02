@@ -65,7 +65,9 @@ function set_prompt() {
     # HISTCMD가 이전 프롬프트가 끝날 때 저장해둔 값보다 커야만 새 명령어를 친 것임
     if [[ -z "$_PREV_HISTCMD" ]] || [[ $HISTCMD -gt $_PREV_HISTCMD ]]; then
         # (1) 방금 내가 친 명령어 추출 (sed 정규식: 히스토리 명령어 앞의 공백과 번호를 깔끔하게 제거)
-    local last_cmd=$(history 1 | sed -e 's/^[[:space:]]*[0-9]\+[[:space:]]*\*?[[:space:]]*//')
+        #local last_cmd=$(history 1 | sed -e 's/^[[:space:]]*[0-9]\+[[:space:]]*\*?[[:space:]]*//')
+        # 서브쉘 전체의 에러 출력을 무시하고, 더 안정적인 fc 명령어를 사용합니다.
+        local last_cmd=$( { fc -ln -1 | sed -e 's/^[[:space:]]*//'; } 2>/dev/null )
 
     # (2) 현재 터미널 전용 히스토리 파일에 기록 (연속 중복 명령어 방지)
     if [[ -n "$last_cmd" && "$last_cmd" != "$_PREV_LOCAL_CMD" ]]; then
