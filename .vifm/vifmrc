@@ -446,12 +446,23 @@ nnoremap <f7> :mkdir<space>
 nnoremap <f8> :delete<cr>
 
 " ------------------------------------------------------------------------------
-
-" Various customization examples
+" **** Various customization examples ****
+" ------------------------------------------------------------------------------
 
 " Use ag (the silver searcher) instead of grep
-"
 " set grepprg=ag\ --line-numbers\ %i\ %a\ %s
+
+" -------------------------------------------------------------
+" 리플래시 시 rg가 있으면 초고속 검색(+ 백업파일, *~, 제외) 적용, 
+" 없으면 vifm 원래 기본값(grep)
+"   macOS :   		$ brew install ripgrep
+"   Linux / Ubuntu: $ sudo apt update && sudo apt install -y ripgrep
+" -------------------------------------------------------------
+if executable('rg')
+    set grepprg="rg --line-number --with-filename --no-heading -g '!*~' %i %a"
+endif
+
+
 
 " Add additional place to look for executables
 "
