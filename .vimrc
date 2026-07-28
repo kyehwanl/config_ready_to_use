@@ -38,13 +38,13 @@ set nocompatible
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
-if has("vms")
-  set nobackup      " do not keep a backup file, use versions instead
-else
-  set backup        " keep a backup file
-endif
-set nobackup 
-set nowritebackup
+"if has("vms")
+"  set nobackup      " do not keep a backup file, use versions instead
+"else
+"  set backup        " keep a backup file
+"endif
+"set nobackup 
+"set nowritebackup
 set history=50      " keep 50 lines of command line history
 set ruler       " show the cursor position all the time
 set showcmd     " display incomplete commands
@@ -631,12 +631,12 @@ command! SmallerFont call SmallerFont()
     set hidden                          " Allow buffer switching without saving
 
     " Setting up the directories {
-        set backup                  " Backups are nice ...
-        if has('persistent_undo')
-            set undofile                " So is persistent undo ...
-            set undolevels=1000         " Maximum number of changes that can be undone
-            set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
-        endif
+        "set backup                  " Backups are nice ...
+        "if has('persistent_undo')
+        "    set undofile                " So is persistent undo ...
+        "    set undolevels=1000         " Maximum number of changes that can be undone
+        "    set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
+        "endif
 
         " To disable views add the following to your .vimrc.bundles.local file:
         let g:spf13_no_views = 1
@@ -1412,7 +1412,34 @@ nnoremap <silent> <leader>tg :GitGutterSignsToggle<CR>
 
 
 
+" =========================================================
+" [ swap, undo, backup - move into .vim ] 
+" =========================================================
+" 1. 중앙 관리 폴더가 없으면 자동으로 생성하는 안전 장치
+if !isdirectory(expand("~/.vim/swap"))
+    call mkdir(expand("~/.vim/swap"), "p")
+endif
+if !isdirectory(expand("~/.vim/backup"))
+    call mkdir(expand("~/.vim/backup"), "p")
+endif
+if !isdirectory(expand("~/.vim/undo"))
+    call mkdir(expand("~/.vim/undo"), "p")
+endif
 
+" 2. Swap 파일 설정 (vim-session 충돌 방지 포함)
+set directory=~/.vim/swap//
+" 세션 파일이 설정(Options)은 저장하지 말고 창이랑 파일 목록만 저장
+set sessionoptions-=options
 
+" 3. Backup 파일 설정
+set backupdir=~/.vim/backup//
+set backup
+set writebackup             " 파일을 덮어쓸 때 안전하게 백업 먼저 생성
 
-
+" 4. Undo 파일 설정 (Vim 버전에 따라 지원 여부 확인 및 통합)
+if has('persistent_undo')
+    set undodir=~/.vim/undo//
+    set undofile
+    set undolevels=1000     " 최대 undo 기록 횟수
+    set undoreload=10000    " 버퍼 리로드 시 저장할 최대 라인 수
+endif
