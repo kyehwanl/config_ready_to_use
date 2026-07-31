@@ -1,0 +1,14 @@
+*~
+*.swp
+*.DS_Store
+cscope*
+*.tar.gz
+*.orig
+*tags
+*.sh
+test-result-*
+temp-*
+*.patch
+diff-*
+.idea/
+gotags

@@ -1,6 +1,6 @@
 [user]
 	name = Kyehwan Lee
-	email = kyehwanl@nist.gov
+	email = kyehwanl@gmail.com
 [merge]
 	tool = vimdiff
 [color]
@@ -17,3 +17,7 @@
 	ci = commit
 	co = checkout
 	br = branch
+    dw = diff -w -b
+	l = log --graph --oneline --decorate
+[core]
+	excludesfile = /Users/kyehwan/.gitignore_global
