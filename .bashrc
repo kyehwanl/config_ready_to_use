@@ -44,6 +44,7 @@ export HISTCONTROL=ignoreboth
 #export HISTCONTROL+=:erasedups
 export HISTIGNORE="pwd:ls:ls -htrl:ll:qq:pst:gs:gl*:q:history*:lh:lhg"
 #export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S  " #--> ble.sh와 충돌, "bash: history: write error: Broken pipe"
+# [SOLVED]:Homebrew Bash 5.2 + ble.sh의 충돌 -->  1. ble-update  2. "builtin history" instead of history 
 
 
 # [중요] 여러 터미널에서 히스토리를 덮어쓰지 않고 이어서 기록함
@@ -80,8 +81,8 @@ function set_prompt() {
     #   - 명령어가 끝날 때마다 즉시 저장하고 다른 세션 기록을 읽어옴
 	# 	--  이전 명령어를 즉시 파일에 저장 (-a)
 	# 	--  다른 세션에서 저장된 새 명령어를 읽어옴 (-n)
-    history -a
-    history -n
+    builtin history -a 2>/dev/null
+    builtin history -n 2>/dev/null
 
     # (4) 다음 프롬프트를 위해 현재의 HISTCMD 저장
     # (history -n 직후에 저장해야 다른 터미널에서 주입된 개수까지 포함하여 정확한 기준점이 됨)
