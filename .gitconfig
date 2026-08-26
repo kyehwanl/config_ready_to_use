@@ -10,14 +10,16 @@
 	diff = auto
 	ui = true
 [alias]
-	show-graph = log --graph --abbrev-commit --pretty=oneline
-        lgodb = log --graph --oneline --decorate --branches
-        ll= log --graph --oneline --decorate --branches
+    show-graph = log --graph --abbrev-commit --pretty=oneline
+    lgodb = log --graph --oneline --decorate --branches
+    l = log --graph --oneline --decorate
+    ll= log --graph --oneline --decorate --branches
+    lb= log --graph --oneline --decorate --branches
+    la= log --graph --oneline --decorate --all
 	st = status
 	ci = commit
 	co = checkout
 	br = branch
     dw = diff -w -b
-	l = log --graph --oneline --decorate
 [core]
 	excludesfile = /Users/kyehwan/.gitignore_global
