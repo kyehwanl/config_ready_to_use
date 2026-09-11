@@ -144,15 +144,29 @@ function! UpdateProjectTags(include_tests, is_auto)
     endif
 endfunction
 
-" 수동 실행용 커스텀 명령어 (메시지 O)
-command! MakeTags call UpdateProjectTags(0, 0)
-command! MakeTagsTest call UpdateProjectTags(1, 0)
+" =========================================================
+" [상태 저장 변수] 현재 테스트 파일 포함 여부를 기억 (기본값: 0)
+" =========================================================
+if !exists('g:gotags_include_tests')
+    let g:gotags_include_tests = 0
+endif
+
+" 상태를 업데이트하고 갱신을 트리거하는 래퍼 함수
+function! TriggerMakeTags(include_tests)
+    " 사용자가 선택한 모드를 전역 변수에 저장
+    let g:gotags_include_tests = a:include_tests
+    call UpdateProjectTags(a:include_tests, 0)
+endfunction
+
+" 수동 실행용 커스텀 명령어 (메시지 O, 상태 변경)
+command! MakeTags call TriggerMakeTags(0)
+command! MakeTagsTest call TriggerMakeTags(1)
 
 " ---------------------------------------------------------
-" 8. 파일 저장 시 자동 갱신 (기본: _test.go 제외, 메시지 X)
+" 8. 파일 저장 시 자동 갱신 (기억된 상태 유지, 메시지 X)
 " ---------------------------------------------------------
 augroup AutoUpdateTagsOnSave
     autocmd!
-    " .go, .c, .h 파일을 저장할 때마다 조용히 갱신
-    autocmd BufWritePost *.go,*.c,*.h call UpdateProjectTags(0, 1)
+    " 저장할 때 무조건 0을 넘기는 게 아니라, 저장되어 있는 g:gotags_include_tests 값을 넘김
+    autocmd BufWritePost *.go,*.c,*.h call UpdateProjectTags(g:gotags_include_tests, 1)
 augroup END
