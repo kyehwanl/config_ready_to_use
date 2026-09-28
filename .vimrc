@@ -426,7 +426,8 @@ nmap <F10>  :TrinityToggleTagList<CR>
 "nmap <F10>  :Tlist<CR> 
 
 " Open and close the NERD_tree.vim separately 
-nmap <F11>  :TrinityToggleNERDTree<CR> 
+"nmap <F11>  :TrinityToggleNERDTree<CR>  (no use: because the windows position stick to the right)
+nmap <F11>  :NERDTreeToggle<CR> 
 
 " }
 
@@ -844,7 +845,7 @@ command! SmallerFont call SmallerFont()
 
 
     " NerdTree {
-        map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
+        map <C-e> :NERDTreeToggle<CR>
         map <leader>e :NERDTreeFind<CR>
         nmap <leader>nt :NERDTreeFind<CR>
 
@@ -856,6 +857,7 @@ command! SmallerFont call SmallerFont()
         let NERDTreeShowHidden=1
         let NERDTreeKeepTreeInNewTab=1
         let g:nerdtree_tabs_open_on_gui_startup=0
+        let g:NERDTreeWinPos = "left"
     " }
 
     " Tabularize {
