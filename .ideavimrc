@@ -34,6 +34,15 @@ iunmap <Right>
 " iunmap <CR>
 " iunmap <TAB>
 
+" --- IME 설정 관련 매핑 해제 (E518 에러 방지) ---
+nunmap i
+nunmap I
+nunmap a
+nunmap A
+nunmap o
+nunmap O
+iunmap <ESC>
+
 
 " =========================================================
 " 4. GoLand IDE 전용 액션 매핑 (vim-go 습관 유지)
