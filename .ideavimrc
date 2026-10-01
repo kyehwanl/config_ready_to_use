@@ -51,6 +51,8 @@ iunmap <ESC>
 
 " [코드 탐색 및 리팩토링 - vim-go 대체]
 map <leader>l <Action>(GotoDeclaration)
+" 점프 후 이전 위치로 돌아가기 (vim의 <C-T> 대체)
+map <leader>h <Action>(Back)
  " vim-go의 GoReferrers 대체 (사용처 찾기)"
 map <leader>r <Action>(FindUsages)     
  " vim-go의 GoRename 대체 (이름 변경)
