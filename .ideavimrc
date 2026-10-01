@@ -78,3 +78,6 @@ map <leader>f <Action>(ReformatCode)
 map <leader>a <Action>(GotoAction)
 " <leader>u 를 눌러 GoLand의 로컬 히스토리 창 열기
 map <leader>u <Action>(LocalHistory.ShowHistory)"
+" [함수 단위 이동 - vim-go의 ]], [[ 대체]
+map ]] <Action>(MethodDown)
+map [[ <Action>(MethodUp)
