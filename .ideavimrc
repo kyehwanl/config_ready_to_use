@@ -49,10 +49,16 @@ iunmap <ESC>
 " =========================================================
 " 주의: .vimrc에서 leader가 ','로 지정되어 있으므로, <leader> = 콤마(,) 입니다.
 
-" [코드 탐색 및 리팩토링 - vim-go 대체]
-map <leader>l <Action>(GotoDeclaration)
+" [코드 탐색 및 리팩토링 - vim-go 대체] -- depricated : 전역검색을 해서 다른 파일로 포커스이동해서 불편
+"map <leader>l <Action>(GotoDeclaration)
 " 점프 후 이전 위치로 돌아가기 (vim의 <C-T> 대체)
-map <leader>h <Action>(Back)
+"map <leader>h <Action>(Back)
+
+" ,l : GoLand의 점프를 실행하면서 동시에 태그 스택(:tags)에 기록 남김 - 개별파일마다 적용가능!!
+nnoremap <leader>l <C-]>
+" ,h : 충돌이 잦은 <C-T> 키 대신(또한, <Action>(Back)은 모든파일대상) 명시적인 태그 팝(:pop) 명령어를 직접 실행하여 한 번에 복귀
+nnoremap <silent> <leader>h :pop<CR>
+
  " vim-go의 GoReferrers 대체 (사용처 찾기)"
 map <leader>r <Action>(FindUsages)     
  " vim-go의 GoRename 대체 (이름 변경)
@@ -64,9 +70,9 @@ map K <Action>(QuickJavaDoc)
 
 " [디버깅 및 포맷팅 - 스크린샷 매핑 개선]
 " 기존의 \r, \b 대신 모두 일관성 있게 <leader>로 통일하는 것을 권장합니다.
-"  " 디버그 시작 (,d)
+"  " 디버그 시작 (,d) -- temporarily not use
 "map <leader>d <Action>(Debug)            
-"" 브레이크포인트 토글 (,b)
+"" 브레이크포인트 토글 (,b) -- temporarily not use
 "map <leader>b <Action>(ToggleLineBreakpoint) 
 "" 코드 서식 정렬 및 import 정리 (,f)
 map <leader>f <Action>(ReformatCode)      
@@ -81,3 +87,29 @@ map <leader>u <Action>(LocalHistory.ShowHistory)"
 " [함수 단위 이동 - vim-go의 ]], [[ 대체]
 map ]] <Action>(MethodDown)
 map [[ <Action>(MethodUp)
+
+
+" Caller / Callee 계층 구조 보기 (기존 ,c 대체)
+map <leader>c <Action>(CallHierarchy)
+
+" gd: 단어 하이라이트(*N) + 선언부로 점프 + 화면 중앙(zz) -- depricated : 전역검색을 해서 다른 파일로 포커스이동해서 불편
+"nnoremap <silent> gd *N:action GotoDeclaration<CR>zz 
+" gD: 단어 하이라이트(*N) + 타입(Type) 선언부로 점프 + 화면 중앙(zz)
+"nnoremap <silent> gD *N:action GotoTypeDeclaration<CR>zz
+
+
+" gd: 정방향 하이라이트 유지(*) + 원래 위치 복귀(N) + 이전 위치로 점프(N) + 화면 중앙(zz)
+nnoremap <silent> gd *NNzz
+" gD: 현재 단어 하이라이트 + 현재 파일의 '가장 처음(맨 위)' 등장 위치로 점프 + 화면 중앙(zz)
+nnoremap <silent> gD *ggnzz
+
+
+
+
+
+
+
+
+
+
+
