@@ -60,45 +60,41 @@ trap 'rm -f "$LOCAL_HISTFILE"' EXIT
 
 
 
-# 2. 프롬프트 설정 함수 수정 (버그 픽스 적용)
+# 현재 터미널 전용 히스토리에 한 줄 기록 (ignorespace / HISTIGNORE / 연속 중복 존중)
+function _lh_add() {
+    local c=$1 pat
+    local -a pats
+    [[ -z $c || $c == [' 	']* || $c == "${_PREV_LOCAL_CMD-}" ]] && return 0
+    IFS=: read -ra pats <<< "$HISTIGNORE"
+    for pat in "${pats[@]}"; do
+        [[ $c == $pat ]] && return 0
+    done
+    printf '%s\n' "$c" >> "$LOCAL_HISTFILE"
+    _PREV_LOCAL_CMD=$c        # export 하지 않음 (자식 셸로 새지 않게)
+}
+
+# 프롬프트 설정 함수
+#   - ble.sh 로드됨 : 히스토리 공유는 ble.sh(history_share=1)가, 로컬 기록은 PREEXEC 훅이 담당
+#   - ble.sh 없음   : 기존 방식 (fc + history -a/-n) 으로 폴백
 function set_prompt() {
-    # 1. 사용자가 이번 프롬프트에서 실제로 명령어를 쳤는지 확인
-    # HISTCMD가 이전 프롬프트가 끝날 때 저장해둔 값보다 커야만 새 명령어를 친 것임
-    if [[ -z "$_PREV_HISTCMD" ]] || [[ $HISTCMD -gt $_PREV_HISTCMD ]]; then
-        # (1) 방금 내가 친 명령어 추출 (sed 정규식: 히스토리 명령어 앞의 공백과 번호를 깔끔하게 제거)
-        #local last_cmd=$(history 1 | sed -e 's/^[[:space:]]*[0-9]\+[[:space:]]*\*?[[:space:]]*//')
-        # 서브쉘 전체의 에러 출력을 무시하고, 더 안정적인 fc 명령어를 사용합니다.
-        local last_cmd=$( { fc -ln -1 | sed -e 's/^[[:space:]]*//'; } 2>/dev/null )
-
-    # (2) 현재 터미널 전용 히스토리 파일에 기록 (연속 중복 명령어 방지)
-    if [[ -n "$last_cmd" && "$last_cmd" != "$_PREV_LOCAL_CMD" ]]; then
-        echo "$last_cmd" >> "$LOCAL_HISTFILE"
-        export _PREV_LOCAL_CMD="$last_cmd"
-    fi
+    if [[ -z ${BLE_VERSION-} ]]; then
+        if [[ -z "$_PREV_HISTCMD" ]] || [[ $HISTCMD -gt $_PREV_HISTCMD ]]; then
+            local last_cmd=$( { fc -ln -1 | sed -e 's/^[[:space:]]*//'; } 2>/dev/null )
+            [[ -n $last_cmd ]] && _lh_add "$last_cmd"
+        fi
+        builtin history -a 2>/dev/null
+        builtin history -n 2>/dev/null
+        _PREV_HISTCMD=$HISTCMD     # history -n 직후에 저장 (다른 터미널에서 주입된 개수 포함)
     fi
 
-    # (3) [기존 로직 유지] 전체 터미널 히스토리 동기화
-    #   - 명령어가 끝날 때마다 즉시 저장하고 다른 세션 기록을 읽어옴
-	# 	--  이전 명령어를 즉시 파일에 저장 (-a)
-	# 	--  다른 세션에서 저장된 새 명령어를 읽어옴 (-n)
-    builtin history -a 2>/dev/null
-    builtin history -n 2>/dev/null
-
-    # (4) 다음 프롬프트를 위해 현재의 HISTCMD 저장
-    # (history -n 직후에 저장해야 다른 터미널에서 주입된 개수까지 포함하여 정확한 기준점이 됨)
-    export _PREV_HISTCMD=$HISTCMD
-
-    # (5) [기존 로직 유지] 프롬프트 렌더링
+    # 프롬프트 렌더링 (기존 그대로)
     if [ $(id -u) -eq 0 ]; then
-        # 루트(root) 계정일 때
         PS1="\[\033[01;32m\]\h\[\033[00m\]\[\033[01;38m\] [\!]{$(dirs|sed -e 's| .*||' -e 's|.*[^/]\(/[^/]*/[^/]*\)|...\1|')}\[\033[00m\]$pound "
     else
-        # 일반 계정일 때
         PS1="\[\033[01;32m\]\h\[\033[00m\]\[\033[01;38m\] [\!]{$(dirs|sed -e 's| .*||' -e 's|.*[^/]\(/[^/]*/[^/]*\)|...\1|')}\[\033[00m\]\$ "
     fi
 }
 
-# 3. PROMPT_COMMAND 설정
 PROMPT_COMMAND=set_prompt
 
 # --- [추가, 2026.0519] 현재 터미널 히스토리 전용 Alias ---
@@ -182,8 +178,10 @@ if [ -f ~/.local/share/blesh/ble.sh ]; then
   # Disable some other markers like "[ble: ...]"
   bleopt edit_marker=
   bleopt edit_marker_error=
-  # ble.sh 전용 동기화 사용
-  #bleopt history_share=1  # --> error with history -a, -n  or HISTTIMEFORMAT
+  # ble.sh 전용 동기화 사용 (2026.1006: 수동 history -a/-n 제거, ble.sh에 위임)
+  bleopt history_share=1
+  # 터미널별 로컬 히스토리 기록 (위쪽 _lh_add 사용)
+  blehook PREEXEC!=_lh_add
 fi
 
 
